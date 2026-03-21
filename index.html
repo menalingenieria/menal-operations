@@ -50,9 +50,9 @@
 
     /* HERO */
     .hero {
-      min-height: 100vh; background: var(--navy);
+      min-height: 80vh; background: var(--navy);
       display: flex; align-items: center;
-      padding: 100px 80px;
+      padding: 100px 80px 80px;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -114,23 +114,10 @@
       font-size: 0.72rem; font-weight: 700;
       letter-spacing: 1.5px; text-transform: uppercase;
       padding: 15px 32px; border-radius: 4px;
-      text-decoration: none; margin-bottom: 40px;
+      text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,195,247,0.28); }
-    .hero-stats {
-      display: flex; gap: 32px;
-      padding-top: 32px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-    .hero-stat-num {
-      font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800;
-      color: var(--white); line-height: 1; margin-bottom: 4px;
-    }
-    .hero-stat-label {
-      font-size: 0.62rem; letter-spacing: 1px; text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-    }
 
     .scroll-hint {
       position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
@@ -368,20 +355,6 @@
         </h1>
         <p class="hero-sub">Ing. Edgardo Mendoza — CEO / Founder</p>
         <a href="#contacto" class="hero-cta">Agendemos nuestra primera reunión</a>
-        <div class="hero-stats">
-          <div>
-            <div class="hero-stat-num">100%</div>
-            <div class="hero-stat-label">A tu medida</div>
-          </div>
-          <div>
-            <div class="hero-stat-num">End-to-end</div>
-            <div class="hero-stat-label">Flujo operativo</div>
-          </div>
-          <div>
-            <div class="hero-stat-num">30 días</div>
-            <div class="hero-stat-label">Acompañamiento</div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
