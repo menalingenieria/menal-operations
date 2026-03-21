@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menal Operations — Soluciones Empresariales</title>
+  <meta name="description" content="Menal Operations — Automatización, gestión y cobros para empresas modernas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:      #1B2A4A;
+      --navy-mid:  #243660;
+      --lime:      #B6FF6E;
+      --lime-dim:  rgba(182,255,110,0.12);
+      --bg:        #F4F3F0;
+      --bg-warm:   #EDEAE4;
+      --white:     #FFFFFF;
+      --muted:     #8A8883;
+      --border:    rgba(27,42,74,0.10);
+      --font-d:    'Cormorant Garamond', Georgia, serif;
+      --font-b:    'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-b); background: var(--bg); color: var(--navy); overflow-x: hidden; }
+
+    /* ── NOISE OVERLAY ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 56px;
+      background: rgba(244,243,240,0.88);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 11px;
+      text-decoration: none;
+    }
+    .nav-brand-mark {
+      width: 28px; height: 28px;
+    }
+    .nav-brand-name {
+      font-family: var(--font-b); font-weight: 500;
+      font-size: 0.68rem; letter-spacing: 3.5px; text-transform: uppercase;
+      color: var(--navy);
+    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--navy); text-decoration: none; opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-cta {
+      opacity: 1 !important;
+      background: var(--navy) !important; color: var(--lime) !important;
+      padding: 9px 22px; border-radius: 2px;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--navy-mid) !important; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 130px 48px 90px;
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .hero-bg-text {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%);
+      font-family: var(--font-d); font-weight: 700; font-size: clamp(200px, 35vw, 480px);
+      color: var(--navy); opacity: 0.028; letter-spacing: -0.05em;
+      user-select: none; white-space: nowrap; pointer-events: none;
+      line-height: 1;
+    }
+    .hero-logo {
+      width: clamp(140px, 22vw, 220px);
+      margin-bottom: 52px;
+      animation: fadeUp 1s 0.1s both;
+    }
+    .hero-eyebrow {
+      font-size: 0.65rem; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 20px;
+      animation: fadeUp 1s 0.25s both;
+    }
+    .hero-title {
+      font-family: var(--font-d); font-weight: 600;
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      line-height: 1.08; letter-spacing: -0.025em;
+      color: var(--navy); margin-bottom: 28px;
+      animation: fadeUp 1s 0.35s both;
+    }
+    .hero-title em { font-style: italic; opacity: 0.45; }
+    .hero-sub {
+      font-size: 0.92rem; color: var(--muted); line-height: 1.75;
+      max-width: 460px; margin: 0 auto 56px;
+      animation: fadeUp 1s 0.45s both;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 1s 0.55s both;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      animation: fadeUp 1s 0.8s both;
+    }
+    .hero-scroll span {
+      font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.5; }
+      50% { transform: scaleY(1.3); opacity: 1; }
+    }
+
+    /* BUTTONS */
+    .btn-dark {
+      background: var(--navy); color: var(--white);
+      padding: 15px 34px; font-family: var(--font-b);
+      font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-dark:hover { background: var(--navy-mid); transform: translateY(-2px); }
+    .btn-ghost {
+      border: 1.5px solid rgba(27,42,74,0.3); color: var(--navy);
+      padding: 15px 34px; font-family: var(--font-b);
+      font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      transition: all 0.2s; display: inline-block;
+    }
+    .btn-ghost:hover { background: var(--navy); color: var(--white); border-color: var(--navy); transform: translateY(-2px); }
+
+    /* ── ACCENT LINE ── */
+    .accent-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--navy) 35%, var(--lime) 65%, transparent 100%);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--navy); padding: 16px 0; overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; width: max-content;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee-item {
+      display: flex; align-items: center; gap: 32px;
+      padding: 0 32px;
+      font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+    }
+    .marquee-star { color: var(--lime); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SERVICES ── */
+    .services { padding: 120px 56px; max-width: 1280px; margin: 0 auto; }
+    .section-header { margin-bottom: 72px; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--lime); background: var(--navy);
+      padding: 6px 14px; border-radius: 2px; margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: var(--font-d); font-weight: 600;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: 1.08; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.75; max-width: 500px;
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .svc-card {
+      background: var(--white); padding: 48px 32px 40px;
+      position: relative; overflow: hidden;
+      transition: transform 0.35s cubic-bezier(.25,.46,.45,.94);
+      cursor: default;
+    }
+    .svc-card:hover { transform: translateY(-6px); }
+    .svc-card::before {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--lime);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.45s cubic-bezier(.25,.46,.45,.94);
+    }
+    .svc-card:hover::before { transform: scaleX(1); }
+    .svc-num {
+      position: absolute; top: 20px; right: 24px;
+      font-family: var(--font-d); font-size: 5rem; font-weight: 700;
+      color: var(--navy); opacity: 0.04; line-height: 1;
+      user-select: none;
+    }
+    .svc-icon {
+      width: 36px; height: 36px; margin-bottom: 32px;
+      opacity: 0.35;
+    }
+    .svc-name {
+      font-family: var(--font-d); font-size: 1.55rem; font-weight: 600;
+      letter-spacing: -0.01em; margin-bottom: 12px;
+    }
+    .svc-desc {
+      font-size: 0.83rem; line-height: 1.72; color: var(--muted);
+    }
+
+    /* ── ABOUT ── */
+    .about { background: var(--navy); padding: 120px 56px; position: relative; overflow: hidden; }
+    .about-watermark {
+      position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
+      font-family: var(--font-d); font-size: 480px; font-weight: 700;
+      color: var(--white); opacity: 0.02; line-height: 1; user-select: none; pointer-events: none;
+    }
+    .about-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+    }
+    .about .section-tag { background: var(--lime); color: var(--navy); }
+    .about .section-title { color: var(--white); }
+    .about-body { font-size: 0.92rem; line-height: 1.85; color: rgba(255,255,255,0.55); margin-top: 24px; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .stat-box {
+      background: rgba(255,255,255,0.04); padding: 36px 28px;
+      border-left: 2px solid rgba(255,255,255,0.06);
+      transition: border-color 0.3s;
+    }
+    .stat-box:hover { border-color: var(--lime); }
+    .stat-num {
+      font-family: var(--font-d); font-size: 3.2rem; font-weight: 700;
+      color: var(--lime); line-height: 1; margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── CONTACT ── */
+    .contact { padding: 120px 56px; text-align: center; }
+    .contact-inner { max-width: 680px; margin: 0 auto; }
+    .contact .section-title { margin-bottom: 16px; }
+    .contact-sub { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 56px; }
+    .contact-cards { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .contact-card {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--white); padding: 18px 26px;
+      border: 1px solid var(--border); border-radius: 2px;
+      text-decoration: none; color: var(--navy); font-size: 0.85rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(27,42,74,0.10);
+    }
+    .contact-card-ico {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--navy); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .contact-card-ico svg { width: 15px; height: 15px; fill: var(--lime); }
+    .contact-card-text strong { display: block; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+    .contact-card-text span { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); padding: 36px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-left { display: flex; align-items: center; gap: 16px; }
+    .footer-copy { font-size: 0.68rem; letter-spacing: 1px; color: rgba(255,255,255,0.25); }
+    .footer-star { color: var(--lime); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-inner { grid-template-columns: 1fr; gap: 56px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 110px 24px 70px; }
+      .services { padding: 80px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about { padding: 80px 24px; }
+      .contact { padding: 80px 24px; }
+      footer { padding: 28px 24px; flex-direction: column; gap: 14px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-brand">
+      <svg class="nav-brand-mark" viewBox="0 0 28 28" fill="none">
+        <path d="M2 26V4L14 18L26 4V26" stroke="#1B2A4A" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+      </svg>
+      <span class="nav-brand-name">Menal Operations</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-text" aria-hidden="true">MO</div>
+
+    <!-- Reemplaza el src con la URL real del logo en Drive -->
+    <img class="hero-logo"
+         src="https://drive.google.com/thumbnail?id=1YKz3AfFlFlcMHUWH4L3HSCjKfyjCGO6x&sz=w800"
+         alt="Menal Operations">
+
+    <p class="hero-eyebrow">Soluciones Empresariales</p>
+    <h1 class="hero-title">
+      Operaciones <em>que</em><br>impulsan tu negocio
+    </h1>
+    <p class="hero-sub">
+      Automatización, gestión de cobros y optimización de procesos para empresas que quieren crecer sin fricciones.
+    </p>
+    <div class="hero-actions">
+      <a href="#servicios" class="btn-dark">Ver servicios</a>
+      <a href="#contacto" class="btn-ghost">Hablar con nosotros</a>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <div class="accent-line"></div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <!-- Duplicado para loop infinito -->
+      <div class="marquee-item">Menal Operations <span class="marquee-star">✦</span> Automatización de Procesos <span class="marquee-star">✦</span> Gestión de Cobros <span class="marquee-star">✦</span> Consultoría Empresarial <span class="marquee-star">✦</span> Soluciones a Medida <span class="marquee-star">✦</span></div>
+      <div class="marquee-item">Menal Operations <span class="marquee-star">✦</span> Automatización de Procesos <span class="marquee-star">✦</span> Gestión de Cobros <span class="marquee-star">✦</span> Consultoría Empresarial <span class="marquee-star">✦</span> Soluciones a Medida <span class="marquee-star">✦</span></div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="servicios">
+    <div class="section-header reveal">
+      <div class="section-tag"><span class="marquee-star">✦</span> Lo que hacemos</div>
+      <h2 class="section-title">Servicios diseñados<br>para <em>resultados reales</em></h2>
+      <p class="section-sub">Cada solución está construida a la medida de tu negocio — sin complejidad innecesaria.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="svc-card reveal reveal-delay-1">
+        <span class="svc-num">01</span>
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M9 7h6m-6 0V5a2 2 0 012-2h2a2 2 0 012 2v2m0 0h3a2 2 0 012 2v3"/>
+        </svg>
+        <h3 class="svc-name">Gestión de Cobros</h3>
+        <p class="svc-desc">Automatiza el seguimiento de pagos y reduce la mora con recordatorios inteligentes por WhatsApp.</p>
+      </div>
+
+      <div class="svc-card reveal reveal-delay-2">
+        <span class="svc-num">02</span>
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+        <h3 class="svc-name">Automatización</h3>
+        <p class="svc-desc">Procesos que antes tomaban horas ahora corren solos — desde reportes hasta notificaciones.</p>
+      </div>
+
+      <div class="svc-card reveal reveal-delay-3">
+        <span class="svc-num">03</span>
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        <h3 class="svc-name">Reportes & Control</h3>
+        <p class="svc-desc">Dashboards en tiempo real para tomar decisiones con información precisa y actualizada.</p>
+      </div>
+
+      <div class="svc-card reveal reveal-delay-4">
+        <span class="svc-num">04</span>
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <h3 class="svc-name">Consultoría</h3>
+        <p class="svc-desc">Analizamos tus operaciones y diseñamos la estrategia más eficiente para tu modelo de negocio.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="accent-line"></div>
+
+  <!-- ABOUT -->
+  <section class="about" id="nosotros">
+    <div class="about-watermark" aria-hidden="true">MO</div>
+    <div class="about-inner">
+      <div class="reveal">
+        <div class="section-tag"><span class="marquee-star">✦</span> Quiénes somos</div>
+        <h2 class="section-title">Expertos en hacer<br><em>más con menos</em></h2>
+        <p class="about-body">
+          En Menal Operations creemos que los negocios no deberían perder tiempo en tareas repetitivas. Combinamos tecnología, automatización y estrategia para que tú te concentres en lo que realmente importa: hacer crecer tu empresa.
+        </p>
+        <p class="about-body" style="margin-top:16px;">
+          Trabajamos con empresas de todos los tamaños, diseñando soluciones que se adaptan a su realidad — sin costos innecesarios, sin complejidad artificial.
+        </p>
+      </div>
+      <div class="about-stats reveal reveal-delay-2">
+        <div class="stat-box">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Soluciones a medida</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">Automatización activa</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Procesos manuales innecesarios</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Escalabilidad</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contacto">
+    <div class="contact-inner">
+      <div class="reveal">
+        <div class="section-tag" style="margin: 0 auto 20px;"><span class="marquee-star">✦</span> Contacto</div>
+        <h2 class="section-title">¿Listo para<br><em>optimizar</em> tu negocio?</h2>
+        <p class="contact-sub">Cuéntanos tu desafío. Diseñamos la solución juntos.</p>
+      </div>
+      <div class="contact-cards reveal reveal-delay-1">
+        <a href="https://wa.me/573019861441" class="contact-card" target="_blank">
+          <div class="contact-card-ico">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.122 1.529 5.857L.057 23.5l5.797-1.522A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.659-.52-5.168-1.425l-.371-.22-3.44.903.918-3.352-.241-.386A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          </div>
+          <div class="contact-card-text">
+            <strong>WhatsApp</strong>
+            <span>+57 301 986 1441</span>
+          </div>
+        </a>
+        <a href="mailto:contacto@menaloperations.com" class="contact-card">
+          <div class="contact-card-ico">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div class="contact-card-text">
+            <strong>Email</strong>
+            <span>contacto@menaloperations.com</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <span class="footer-star">✦</span>
+      <span class="footer-copy">© 2026 Menal Operations. Todos los derechos reservados.</span>
+    </div>
+    <span class="footer-copy">Colombia</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav shadow on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.boxShadow = window.scrollY > 40 ? '0 2px 24px rgba(27,42,74,0.08)' : '';
+    });
+  </script>
+</body>
+</html>
