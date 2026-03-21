@@ -3,518 +3,662 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menal Operations — Soluciones Empresariales</title>
-  <meta name="description" content="Menal Operations — Automatización, gestión y cobros para empresas modernas.">
+  <title>Menal Operations — Tecnología que Transforma</title>
+  <meta name="description" content="Automatización, cobros inteligentes y sistemas a medida para empresas colombianas que quieren operar mejor.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
   <style>
+    /* ══════════════════════════════
+       TOKENS
+    ══════════════════════════════ */
     :root {
       --navy:      #1B2A4A;
-      --navy-mid:  #243660;
-      --lime:      #B6FF6E;
-      --lime-dim:  rgba(182,255,110,0.12);
-      --bg:        #F4F3F0;
-      --bg-warm:   #EDEAE4;
+      --navy-2:    #162240;
+      --navy-3:    #0F1A30;
+      --lime:      #4FC3F7;
+      --lime-glow: rgba(79,195,247,0.18);
+      --lime-dim:  rgba(79,195,247,0.08);
+      --bg:        #F2F1ED;
+      --bg-2:      #E8E6E0;
       --white:     #FFFFFF;
-      --muted:     #8A8883;
-      --border:    rgba(27,42,74,0.10);
-      --font-d:    'Cormorant Garamond', Georgia, serif;
-      --font-b:    'DM Sans', system-ui, sans-serif;
+      --muted:     rgba(255,255,255,0.42);
+      --muted-d:   #8A8780;
+      --border:    rgba(255,255,255,0.07);
+      --border-l:  rgba(27,42,74,0.10);
+      --fd:        'Syne', sans-serif;
+      --fm:        'IBM Plex Mono', monospace;
+      --fb:        'DM Sans', system-ui, sans-serif;
     }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-b); background: var(--bg); color: var(--navy); overflow-x: hidden; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--fb); background:var(--bg); color:var(--navy); overflow-x:hidden; }
 
-    /* ── NOISE OVERLAY ── */
+    /* ══════════════════════════════
+       NOISE TEXTURE
+    ══════════════════════════════ */
     body::after {
-      content: '';
-      position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      opacity: 0.6;
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity:.5;
     }
 
-    /* ── NAV ── */
+    /* ══════════════════════════════
+       NAV
+    ══════════════════════════════ */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 56px;
-      background: rgba(244,243,240,0.88);
-      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border);
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 56px;
+      background:rgba(27,42,74,0.95);
+      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
     }
-    .nav-brand {
-      display: flex; align-items: center; gap: 11px;
-      text-decoration: none;
-    }
-    .nav-brand-mark {
-      width: 28px; height: 28px;
-    }
-    .nav-brand-name {
-      font-family: var(--font-b); font-weight: 500;
-      font-size: 0.68rem; letter-spacing: 3.5px; text-transform: uppercase;
-      color: var(--navy);
-    }
-    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-logo { height:40px; width:auto; object-fit:contain; display:block; }
+    .nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
     .nav-links a {
-      font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--navy); text-decoration: none; opacity: 0.5;
-      transition: opacity 0.2s;
+      font-family:var(--fm); font-size:0.65rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--muted); text-decoration:none;
+      transition:color .2s;
     }
-    .nav-links a:hover { opacity: 1; }
+    .nav-links a:hover { color:#fff; }
     .nav-cta {
-      opacity: 1 !important;
-      background: var(--navy) !important; color: var(--lime) !important;
-      padding: 9px 22px; border-radius: 2px;
-      transition: background 0.2s, transform 0.15s !important;
+      font-family:var(--fm); font-size:0.65rem; letter-spacing:2px; text-transform:uppercase;
+      background:var(--lime); color:var(--white) !important;
+      padding:10px 22px; border-radius:2px;
+      transition:opacity .2s, transform .15s;
     }
-    .nav-cta:hover { background: var(--navy-mid) !important; transform: translateY(-1px); }
+    .nav-cta:hover { opacity:.88; transform:translateY(-1px); }
 
-    /* ── HERO ── */
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
     .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 130px 48px 90px;
-      position: relative; overflow: hidden; text-align: center;
+      min-height:100vh; background:var(--navy-3);
+      display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:140px 56px 80px; position:relative; overflow:hidden;
     }
-    .hero-bg-text {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%);
-      font-family: var(--font-d); font-weight: 700; font-size: clamp(200px, 35vw, 480px);
-      color: var(--navy); opacity: 0.028; letter-spacing: -0.05em;
-      user-select: none; white-space: nowrap; pointer-events: none;
-      line-height: 1;
+
+    /* Animated dot grid */
+    .hero-grid {
+      position:absolute; inset:0; pointer-events:none;
+      background-image: radial-gradient(circle, rgba(79,195,247,0.12) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridDrift 20s ease-in-out infinite alternate;
     }
-    .hero-logo {
-      width: clamp(220px, 35vw, 380px);
-      margin-bottom: 52px;
-      animation: fadeUp 1s 0.1s both;
+    @keyframes gridDrift {
+      from { background-position:0 0; }
+      to   { background-position:40px 40px; }
     }
-    .hero-eyebrow {
-      font-size: 0.65rem; letter-spacing: 5px; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 20px;
-      animation: fadeUp 1s 0.25s both;
+
+    /* Glow orb */
+    .hero-orb {
+      position:absolute; right:-100px; top:50%; transform:translateY(-50%);
+      width:600px; height:600px; border-radius:50%;
+      background:radial-gradient(circle, rgba(79,195,247,0.06) 0%, transparent 70%);
+      pointer-events:none;
     }
+
+    .hero-content { position:relative; z-index:1; max-width:900px; }
+
+    .hero-label {
+      display:inline-flex; align-items:center; gap:10px;
+      font-family:var(--fm); font-size:0.65rem; letter-spacing:3px; text-transform:uppercase;
+      color:var(--lime); margin-bottom:32px;
+      animation:fadeUp .8s .1s both;
+    }
+    .hero-label::before {
+      content:''; width:24px; height:1px; background:var(--lime);
+    }
+
     .hero-title {
-      font-family: var(--font-d); font-weight: 600;
-      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
-      line-height: 1.08; letter-spacing: -0.025em;
-      color: var(--navy); margin-bottom: 28px;
-      animation: fadeUp 1s 0.35s both;
+      font-family:var(--fd); font-size:clamp(3rem, 7vw, 6.5rem);
+      font-weight:800; line-height:1.02; letter-spacing:-0.03em;
+      color:#fff; margin-bottom:28px;
+      animation:fadeUp .8s .2s both;
     }
-    .hero-title em { font-style: italic; opacity: 0.45; }
+    .hero-title .lime { color:var(--lime); }
+    .hero-title .cursor {
+      display:inline-block; width:4px; height:.85em;
+      background:var(--lime); margin-left:4px; vertical-align:middle;
+      animation:blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
     .hero-sub {
-      font-size: 0.92rem; color: var(--muted); line-height: 1.75;
-      max-width: 460px; margin: 0 auto 56px;
-      animation: fadeUp 1s 0.45s both;
+      font-size:1rem; line-height:1.78; color:var(--muted);
+      max-width:520px; margin-bottom:52px;
+      animation:fadeUp .8s .35s both;
     }
+
     .hero-actions {
-      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-      animation: fadeUp 1s 0.55s both;
+      display:flex; gap:14px; flex-wrap:wrap;
+      animation:fadeUp .8s .45s both;
     }
-    .hero-scroll {
-      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      animation: fadeUp 1s 0.8s both;
+
+    .hero-stats {
+      display:flex; gap:0; margin-top:80px;
+      border-top:1px solid var(--border);
+      animation:fadeUp .8s .55s both;
     }
-    .hero-scroll span {
-      font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
+    .stat {
+      padding:28px 40px 24px 0; margin-right:40px;
+      border-right:1px solid var(--border);
     }
-    .scroll-line {
-      width: 1px; height: 48px;
-      background: linear-gradient(to bottom, var(--muted), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
+    .stat:last-child { border-right:none; }
+    .stat-val {
+      font-family:var(--fd); font-size:2.2rem; font-weight:800;
+      color:var(--lime); line-height:1; margin-bottom:6px;
     }
-    @keyframes scrollPulse {
-      0%, 100% { transform: scaleY(1); opacity: 0.5; }
-      50% { transform: scaleY(1.3); opacity: 1; }
+    .stat-lbl {
+      font-family:var(--fm); font-size:0.6rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--muted);
     }
 
     /* BUTTONS */
+    .btn-lime {
+      background:var(--lime); color:var(--navy);
+      padding:15px 32px; font-family:var(--fd); font-weight:700;
+      font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase;
+      text-decoration:none; border-radius:2px; display:inline-block;
+      transition:opacity .2s, transform .15s;
+    }
+    .btn-lime:hover { opacity:.88; transform:translateY(-2px); }
+    .btn-ghost-light {
+      border:1.5px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.75);
+      padding:15px 32px; font-family:var(--fd); font-weight:600;
+      font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase;
+      text-decoration:none; border-radius:2px; display:inline-block;
+      transition:all .2s;
+    }
+    .btn-ghost-light:hover { border-color:#fff; color:#fff; transform:translateY(-2px); }
     .btn-dark {
-      background: var(--navy); color: var(--white);
-      padding: 15px 34px; font-family: var(--font-b);
-      font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase;
-      text-decoration: none; border-radius: 2px;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-block;
+      background:var(--navy); color:#fff;
+      padding:15px 32px; font-family:var(--fd); font-weight:700;
+      font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase;
+      text-decoration:none; border-radius:2px; display:inline-block;
+      transition:background .2s, transform .15s;
     }
-    .btn-dark:hover { background: var(--navy-mid); transform: translateY(-2px); }
-    .btn-ghost {
-      border: 1.5px solid rgba(27,42,74,0.3); color: var(--navy);
-      padding: 15px 34px; font-family: var(--font-b);
-      font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase;
-      text-decoration: none; border-radius: 2px;
-      transition: all 0.2s; display: inline-block;
+    .btn-dark:hover { background:var(--navy-2); transform:translateY(-2px); }
+    .btn-ghost-dark {
+      border:1.5px solid rgba(27,42,74,0.25); color:var(--navy);
+      padding:15px 32px; font-family:var(--fd); font-weight:600;
+      font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase;
+      text-decoration:none; border-radius:2px; display:inline-block;
+      transition:all .2s;
     }
-    .btn-ghost:hover { background: var(--navy); color: var(--white); border-color: var(--navy); transform: translateY(-2px); }
+    .btn-ghost-dark:hover { background:var(--navy); color:#fff; transform:translateY(-2px); }
 
-    /* ── ACCENT LINE ── */
-    .accent-line {
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--navy) 35%, var(--lime) 65%, transparent 100%);
-    }
-
-    /* ── MARQUEE ── */
+    /* ══════════════════════════════
+       MARQUEE
+    ══════════════════════════════ */
     .marquee-wrap {
-      background: var(--navy); padding: 16px 0; overflow: hidden;
+      background:var(--navy-2); padding:14px 0; overflow:hidden;
     }
     .marquee-track {
-      display: flex; width: max-content;
-      animation: marquee 30s linear infinite;
+      display:flex; width:max-content;
+      animation:marquee 28s linear infinite;
     }
     .marquee-item {
-      display: flex; align-items: center; gap: 32px;
-      padding: 0 32px;
-      font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      white-space: nowrap;
+      display:flex; align-items:center; gap:28px;
+      padding:0 28px; white-space:nowrap;
+      font-family:var(--fm); font-size:0.62rem; letter-spacing:3px; text-transform:uppercase;
+      color:rgba(255,255,255,0.5);
     }
-    .marquee-star { color: var(--lime); }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
+    .marquee-dot { width:4px; height:4px; background:var(--lime); border-radius:50%; opacity:.6; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-    /* ── SERVICES ── */
-    .services { padding: 120px 56px; max-width: 1280px; margin: 0 auto; }
-    .section-header { margin-bottom: 72px; }
-    .section-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--lime); background: var(--navy);
-      padding: 6px 14px; border-radius: 2px; margin-bottom: 20px;
+    /* ══════════════════════════════
+       SERVICES
+    ══════════════════════════════ */
+    .services { padding:120px 56px; background:var(--bg); }
+    .services-inner { max-width:1280px; margin:0 auto; }
+
+    .section-label {
+      font-family:var(--fm); font-size:0.62rem; letter-spacing:3.5px; text-transform:uppercase;
+      color:var(--navy); opacity:.45; margin-bottom:16px; display:block;
     }
     .section-title {
-      font-family: var(--font-d); font-weight: 600;
-      font-size: clamp(2rem, 4vw, 3.8rem);
-      line-height: 1.08; letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      font-family:var(--fd); font-size:clamp(2rem, 4vw, 3.6rem);
+      font-weight:800; line-height:1.06; letter-spacing:-0.025em;
+      color:var(--navy); margin-bottom:72px;
     }
-    .section-sub {
-      font-size: 0.88rem; color: var(--muted); line-height: 1.75; max-width: 500px;
-    }
-    .services-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-    }
+    .section-title span { color:var(--navy); opacity:.28; }
+
+    .svc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:3px; }
+
     .svc-card {
-      background: var(--white); padding: 48px 32px 40px;
-      position: relative; overflow: hidden;
-      transition: transform 0.35s cubic-bezier(.25,.46,.45,.94);
-      cursor: default;
+      background:var(--white); padding:52px 44px 44px;
+      position:relative; overflow:hidden;
+      transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s;
+      cursor:default;
     }
-    .svc-card:hover { transform: translateY(-6px); }
-    .svc-card::before {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 2px; background: var(--lime);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.45s cubic-bezier(.25,.46,.45,.94);
+    .svc-card:hover {
+      transform:translateY(-5px);
+      box-shadow:0 20px 60px rgba(27,42,74,0.10);
     }
-    .svc-card:hover::before { transform: scaleX(1); }
-    .svc-num {
-      position: absolute; top: 20px; right: 24px;
-      font-family: var(--font-d); font-size: 5rem; font-weight: 700;
-      color: var(--navy); opacity: 0.04; line-height: 1;
-      user-select: none;
+    .svc-card::after {
+      content:''; position:absolute; inset:0;
+      border-bottom:2px solid var(--lime);
+      transform:scaleX(0); transform-origin:left;
+      transition:transform .45s cubic-bezier(.25,.46,.45,.94);
+    }
+    .svc-card:hover::after { transform:scaleX(1); }
+
+    .svc-tag {
+      font-family:var(--fm); font-size:0.58rem; letter-spacing:3px; text-transform:uppercase;
+      color:var(--lime); background:var(--navy);
+      display:inline-block; padding:4px 10px; border-radius:2px; margin-bottom:28px;
     }
     .svc-icon {
-      width: 36px; height: 36px; margin-bottom: 32px;
-      opacity: 0.35;
+      width:48px; height:48px; margin-bottom:24px;
+      color:var(--navy); opacity:.2;
+      transition:opacity .3s, color .3s;
     }
+    .svc-card:hover .svc-icon { opacity:1; color:var(--navy); }
     .svc-name {
-      font-family: var(--font-d); font-size: 1.55rem; font-weight: 600;
-      letter-spacing: -0.01em; margin-bottom: 12px;
+      font-family:var(--fd); font-size:1.7rem; font-weight:700;
+      letter-spacing:-0.02em; margin-bottom:14px; color:var(--navy);
     }
     .svc-desc {
-      font-size: 0.83rem; line-height: 1.72; color: var(--muted);
+      font-size:0.88rem; line-height:1.78; color:var(--muted-d);
+    }
+    .svc-num {
+      position:absolute; bottom:20px; right:28px;
+      font-family:var(--fd); font-size:5.5rem; font-weight:800;
+      color:var(--navy); opacity:.04; line-height:1; user-select:none;
     }
 
-    /* ── ABOUT ── */
-    .about { background: var(--navy); padding: 120px 56px; position: relative; overflow: hidden; }
-    .about-watermark {
-      position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
-      font-family: var(--font-d); font-size: 480px; font-weight: 700;
-      color: var(--white); opacity: 0.02; line-height: 1; user-select: none; pointer-events: none;
+    /* ══════════════════════════════
+       PROCESS
+    ══════════════════════════════ */
+    .process { background:var(--navy); padding:120px 56px; }
+    .process-inner { max-width:1280px; margin:0 auto; }
+    .process .section-label { color:var(--lime); opacity:1; }
+    .process .section-title { color:#fff; margin-bottom:80px; }
+    .process .section-title span { color:#fff; opacity:.2; }
+
+    .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+    .step {
+      background:rgba(255,255,255,0.03); padding:48px 36px;
+      border-top:2px solid rgba(255,255,255,0.06);
+      transition:border-color .3s, background .3s;
     }
+    .step:hover { border-color:var(--lime); background:rgba(255,255,255,0.05); }
+    .step-num {
+      font-family:var(--fm); font-size:0.62rem; letter-spacing:3px;
+      color:var(--lime); margin-bottom:24px; display:block;
+    }
+    .step-title {
+      font-family:var(--fd); font-size:1.35rem; font-weight:700;
+      color:#fff; margin-bottom:14px; letter-spacing:-0.01em;
+    }
+    .step-desc { font-size:0.86rem; line-height:1.75; color:var(--muted); }
+
+    /* ══════════════════════════════
+       ABOUT
+    ══════════════════════════════ */
+    .about { background:var(--bg-2); padding:120px 56px; }
     .about-inner {
-      max-width: 1280px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+      max-width:1280px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
     }
-    .about .section-tag { background: var(--lime); color: var(--navy); }
-    .about .section-title { color: var(--white); }
-    .about-body { font-size: 0.92rem; line-height: 1.85; color: rgba(255,255,255,0.55); margin-top: 24px; }
-    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-    .stat-box {
-      background: rgba(255,255,255,0.04); padding: 36px 28px;
-      border-left: 2px solid rgba(255,255,255,0.06);
-      transition: border-color 0.3s;
+    .about-img-wrap {
+      position:relative; display:flex; align-items:center; justify-content:center;
     }
-    .stat-box:hover { border-color: var(--lime); }
-    .stat-num {
-      font-family: var(--font-d); font-size: 3.2rem; font-weight: 700;
-      color: var(--lime); line-height: 1; margin-bottom: 8px;
+    .about-logo {
+      width:70%; max-width:280px; opacity:.12;
+      filter:blur(0px);
     }
-    .stat-label {
-      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+    .about-badge {
+      position:absolute; bottom:-10px; right:0;
+      background:var(--navy); padding:20px 24px; border-radius:2px;
     }
+    .about-badge-val {
+      font-family:var(--fd); font-size:1.8rem; font-weight:800;
+      color:var(--lime); line-height:1; margin-bottom:4px;
+    }
+    .about-badge-lbl {
+      font-family:var(--fm); font-size:0.58rem; letter-spacing:2px;
+      text-transform:uppercase; color:rgba(255,255,255,.4);
+    }
+    .about-text p {
+      font-size:0.92rem; line-height:1.82; color:var(--muted-d); margin-bottom:16px;
+    }
+    .about-text p:last-of-type { margin-bottom:32px; }
 
-    /* ── CONTACT ── */
-    .contact { padding: 120px 56px; text-align: center; }
-    .contact-inner { max-width: 680px; margin: 0 auto; }
-    .contact .section-title { margin-bottom: 16px; }
-    .contact-sub { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 56px; }
-    .contact-cards { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    /* ══════════════════════════════
+       CONTACT
+    ══════════════════════════════ */
+    .contact { background:var(--navy-3); padding:120px 56px; }
+    .contact-inner { max-width:1280px; margin:0 auto; }
+    .contact .section-label { color:var(--lime); opacity:1; }
+    .contact .section-title { color:#fff; margin-bottom:56px; }
+    .contact .section-title span { color:#fff; opacity:.2; }
+
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
     .contact-card {
-      display: flex; align-items: center; gap: 14px;
-      background: var(--white); padding: 18px 26px;
-      border: 1px solid var(--border); border-radius: 2px;
-      text-decoration: none; color: var(--navy); font-size: 0.85rem;
-      transition: transform 0.2s, box-shadow 0.2s;
+      background:rgba(255,255,255,0.04); padding:40px 36px;
+      border:1px solid var(--border); border-radius:0;
+      text-decoration:none; color:#fff; display:flex; align-items:center; gap:20px;
+      transition:background .25s, border-color .25s, transform .2s;
     }
     .contact-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 48px rgba(27,42,74,0.10);
+      background:rgba(79,195,247,0.06); border-color:rgba(79,195,247,0.25);
+      transform:translateY(-3px);
     }
-    .contact-card-ico {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: var(--navy); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    .contact-icon {
+      width:44px; height:44px; border-radius:50%;
+      background:var(--lime-dim); border:1px solid rgba(79,195,247,0.2);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
     }
-    .contact-card-ico svg { width: 15px; height: 15px; fill: var(--lime); }
-    .contact-card-text strong { display: block; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
-    .contact-card-text span { font-size: 0.82rem; color: var(--muted); }
+    .contact-icon svg { width:18px; height:18px; fill:var(--lime); }
+    .contact-type {
+      font-family:var(--fm); font-size:0.6rem; letter-spacing:2.5px;
+      text-transform:uppercase; color:var(--lime); margin-bottom:4px; display:block;
+    }
+    .contact-val { font-family:var(--fd); font-size:1.1rem; font-weight:700; color:#fff; }
 
-    /* ── FOOTER ── */
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
     footer {
-      background: var(--navy); padding: 36px 56px;
-      display: flex; align-items: center; justify-content: space-between;
+      background:var(--navy); padding:32px 56px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-top:1px solid var(--border);
     }
-    .footer-left { display: flex; align-items: center; gap: 16px; }
-    .footer-copy { font-size: 0.68rem; letter-spacing: 1px; color: rgba(255,255,255,0.25); }
-    .footer-star { color: var(--lime); }
+    .footer-left { display:flex; align-items:center; gap:20px; }
+    .footer-logo { height:28px; width:auto; object-fit:contain; opacity:.6; }
+    .footer-copy {
+      font-family:var(--fm); font-size:0.62rem; letter-spacing:1px;
+      color:rgba(255,255,255,.25);
+    }
+    .footer-link {
+      font-family:var(--fm); font-size:0.62rem; letter-spacing:1px;
+      color:rgba(255,255,255,.25); text-decoration:none;
+      transition:color .2s;
+    }
+    .footer-link:hover { color:var(--lime); }
 
-    /* ── ANIMATIONS ── */
+    /* ══════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════ */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(30px); }
+      to   { opacity:1; transform:translateY(0); }
     }
-    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
-    .reveal.in { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal {
+      opacity:0; transform:translateY(40px);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+    .reveal.in { opacity:1; transform:none; }
+    .d1 { transition-delay:.08s; }
+    .d2 { transition-delay:.16s; }
+    .d3 { transition-delay:.24s; }
+    .d4 { transition-delay:.32s; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-inner { grid-template-columns: 1fr; gap: 56px; }
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width:1024px) {
+      .svc-grid  { grid-template-columns:1fr; }
+      .steps     { grid-template-columns:1fr; }
+      .about-inner { grid-template-columns:1fr; }
+      .about-img-wrap { display:none; }
+      .contact-grid { grid-template-columns:1fr; }
     }
-    @media (max-width: 768px) {
-      nav { padding: 18px 24px; }
-      .nav-links { display: none; }
-      .hero { padding: 110px 24px 70px; }
-      .services { padding: 80px 24px; }
-      .services-grid { grid-template-columns: 1fr; }
-      .about { padding: 80px 24px; }
-      .contact { padding: 80px 24px; }
-      footer { padding: 28px 24px; flex-direction: column; gap: 14px; text-align: center; }
+    @media (max-width:768px) {
+      nav { padding:16px 24px; }
+      .nav-links { display:none; }
+      .hero, .services, .process, .about, .contact { padding-left:24px; padding-right:24px; }
+      .hero { padding-top:110px; padding-bottom:56px; }
+      .hero-stats { flex-direction:column; gap:0; }
+      .stat { border-right:none; border-bottom:1px solid var(--border); padding:20px 0; margin-right:0; }
+      footer { padding:24px; flex-direction:column; gap:12px; text-align:center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-brand">
-      <svg class="nav-brand-mark" viewBox="0 0 28 28" fill="none">
-        <path d="M2 26V4L14 18L26 4V26" stroke="#1B2A4A" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-      </svg>
-      <span class="nav-brand-name">Menal Operations</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#nosotros">Nosotros</a></li>
-      <li><a href="#contacto" class="nav-cta">Contacto</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg-text" aria-hidden="true">MO</div>
-
-    <!-- Reemplaza el src con la URL real del logo en Drive -->
-    <img class="hero-logo"
-         src="https://drive.google.com/thumbnail?id=150_1wJbjLG89iJFNfuK6bie4-5EgC92X&sz=w800"
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#">
+    <img class="nav-logo"
+         src="https://drive.google.com/thumbnail?id=150_1wJbjLG89iJFNfuK6bie4-5EgC92X&sz=w200"
          alt="Menal Operations">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
 
-    <p class="hero-eyebrow">Soluciones Empresariales</p>
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+
+  <div class="hero-content">
+    <div class="hero-label">Menal Operations · Tecnología Empresarial</div>
+
     <h1 class="hero-title">
-      Operaciones <em>que</em><br>impulsan tu negocio
+      Automatiza.<br>
+      <span class="lime" id="typeTarget"></span><span class="cursor"></span>
     </h1>
+
     <p class="hero-sub">
-      Automatización, gestión de cobros y optimización de procesos para empresas que quieren crecer sin fricciones.
+      Diseñamos e implementamos sistemas tecnológicos que eliminan el trabajo manual, aceleran los cobros y escalan contigo — sin fricción, sin límites.
     </p>
+
     <div class="hero-actions">
-      <a href="#servicios" class="btn-dark">Ver servicios</a>
-      <a href="#contacto" class="btn-ghost">Hablar con nosotros</a>
+      <a href="#contacto" class="btn-lime">Hablemos de tu proyecto</a>
+      <a href="#servicios" class="btn-ghost-light">Ver servicios</a>
     </div>
 
-    <div class="hero-scroll" aria-hidden="true">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-
-  <div class="accent-line"></div>
-
-  <!-- MARQUEE -->
-  <div class="marquee-wrap" aria-hidden="true">
-    <div class="marquee-track">
-      <!-- Duplicado para loop infinito -->
-      <div class="marquee-item">Menal Operations <span class="marquee-star">✦</span> Automatización de Procesos <span class="marquee-star">✦</span> Gestión de Cobros <span class="marquee-star">✦</span> Consultoría Empresarial <span class="marquee-star">✦</span> Soluciones a Medida <span class="marquee-star">✦</span></div>
-      <div class="marquee-item">Menal Operations <span class="marquee-star">✦</span> Automatización de Procesos <span class="marquee-star">✦</span> Gestión de Cobros <span class="marquee-star">✦</span> Consultoría Empresarial <span class="marquee-star">✦</span> Soluciones a Medida <span class="marquee-star">✦</span></div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-val">100%</div>
+        <div class="stat-lbl">Soluciones a medida</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">24/7</div>
+        <div class="stat-lbl">Automatización activa</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">0</div>
+        <div class="stat-lbl">Procesos manuales innecesarios</div>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- SERVICES -->
-  <section class="services" id="servicios">
-    <div class="section-header reveal">
-      <div class="section-tag"><span class="marquee-star">✦</span> Lo que hacemos</div>
-      <h2 class="section-title">Servicios diseñados<br>para <em>resultados reales</em></h2>
-      <p class="section-sub">Cada solución está construida a la medida de tu negocio — sin complejidad innecesaria.</p>
-    </div>
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Automatización de Procesos <span class="marquee-dot"></span> Gestión de Cobros <span class="marquee-dot"></span> Sistemas a Medida <span class="marquee-dot"></span> Consultoría Tecnológica <span class="marquee-dot"></span> WhatsApp Business API <span class="marquee-dot"></span> Google Apps Script <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Automatización de Procesos <span class="marquee-dot"></span> Gestión de Cobros <span class="marquee-dot"></span> Sistemas a Medida <span class="marquee-dot"></span> Consultoría Tecnológica <span class="marquee-dot"></span> WhatsApp Business API <span class="marquee-dot"></span> Google Apps Script <span class="marquee-dot"></span></div>
+  </div>
+</div>
 
-    <div class="services-grid">
-      <div class="svc-card reveal reveal-delay-1">
-        <span class="svc-num">01</span>
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M9 7h6m-6 0V5a2 2 0 012-2h2a2 2 0 012 2v2m0 0h3a2 2 0 012 2v3"/>
-        </svg>
-        <h3 class="svc-name">Gestión de Cobros</h3>
-        <p class="svc-desc">Automatiza el seguimiento de pagos y reduce la mora con recordatorios inteligentes por WhatsApp.</p>
-      </div>
+<!-- ══ SERVICES ══ -->
+<section class="services" id="servicios">
+  <div class="services-inner">
+    <span class="section-label reveal">// Lo que hacemos</span>
+    <h2 class="section-title reveal">Servicios que mueven<br><span>el negocio hacia adelante</span></h2>
 
-      <div class="svc-card reveal reveal-delay-2">
-        <span class="svc-num">02</span>
+    <div class="svc-grid">
+
+      <div class="svc-card reveal d1">
+        <span class="svc-tag">01 · Automatización</span>
         <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
         </svg>
-        <h3 class="svc-name">Automatización</h3>
-        <p class="svc-desc">Procesos que antes tomaban horas ahora corren solos — desde reportes hasta notificaciones.</p>
+        <h3 class="svc-name">Automatización de Procesos</h3>
+        <p class="svc-desc">Convertimos tareas repetitivas en flujos automáticos. Reportes, notificaciones, registros y más — corriendo solos mientras tú te concentras en crecer.</p>
+        <span class="svc-num">01</span>
       </div>
 
-      <div class="svc-card reveal reveal-delay-3">
+      <div class="svc-card reveal d2">
+        <span class="svc-tag">02 · Cobros</span>
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+        </svg>
+        <h3 class="svc-name">Cobros Inteligentes</h3>
+        <p class="svc-desc">Sistema de cobros automatizado vía WhatsApp Business API. Recordatorios en el momento exacto, seguimiento de mora y reportes en tiempo real.</p>
+        <span class="svc-num">02</span>
+      </div>
+
+      <div class="svc-card reveal d3">
+        <span class="svc-tag">03 · Desarrollo</span>
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        <h3 class="svc-name">Sistemas a Medida</h3>
+        <p class="svc-desc">Desarrollamos herramientas diseñadas exactamente para tu operación — paneles de control, integraciones, bases de datos y aplicaciones web sin fricción.</p>
         <span class="svc-num">03</span>
+      </div>
+
+      <div class="svc-card reveal d4">
+        <span class="svc-tag">04 · Estrategia</span>
         <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
         </svg>
-        <h3 class="svc-name">Reportes & Control</h3>
-        <p class="svc-desc">Dashboards en tiempo real para tomar decisiones con información precisa y actualizada.</p>
-      </div>
-
-      <div class="svc-card reveal reveal-delay-4">
+        <h3 class="svc-name">Consultoría Tecnológica</h3>
+        <p class="svc-desc">Analizamos tu operación actual e identificamos dónde la tecnología puede darte más ventaja competitiva — con hoja de ruta clara y sin rodeos.</p>
         <span class="svc-num">04</span>
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-        </svg>
-        <h3 class="svc-name">Consultoría</h3>
-        <p class="svc-desc">Analizamos tus operaciones y diseñamos la estrategia más eficiente para tu modelo de negocio.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section class="process" id="proceso">
+  <div class="process-inner">
+    <span class="section-label reveal">// Cómo trabajamos</span>
+    <h2 class="section-title reveal">Simple. Rápido.<br><span>Sin complicaciones.</span></h2>
+
+    <div class="steps">
+      <div class="step reveal d1">
+        <span class="step-num">PASO · 01</span>
+        <h3 class="step-title">Diagnóstico</h3>
+        <p class="step-desc">Entendemos tu operación, tus cuellos de botella y tus objetivos. Sin tecnicismos — hablamos tu idioma.</p>
+      </div>
+      <div class="step reveal d2">
+        <span class="step-num">PASO · 02</span>
+        <h3 class="step-title">Diseño y Desarrollo</h3>
+        <p class="step-desc">Construimos la solución a tu medida, iterando rápido y manteniéndote informado en cada etapa.</p>
+      </div>
+      <div class="step reveal d3">
+        <span class="step-num">PASO · 03</span>
+        <h3 class="step-title">Implementación</h3>
+        <p class="step-desc">Desplegamos, probamos y te entregamos todo funcionando. Con soporte para que la transición sea sin fricción.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="accent-line"></div>
-
-  <!-- ABOUT -->
-  <section class="about" id="nosotros">
-    <div class="about-watermark" aria-hidden="true">MO</div>
-    <div class="about-inner">
-      <div class="reveal">
-        <div class="section-tag"><span class="marquee-star">✦</span> Quiénes somos</div>
-        <h2 class="section-title">Expertos en hacer<br><em>más con menos</em></h2>
-        <p class="about-body">
-          En Menal Operations creemos que los negocios no deberían perder tiempo en tareas repetitivas. Combinamos tecnología, automatización y estrategia para que tú te concentres en lo que realmente importa: hacer crecer tu empresa.
-        </p>
-        <p class="about-body" style="margin-top:16px;">
-          Trabajamos con empresas de todos los tamaños, diseñando soluciones que se adaptan a su realidad — sin costos innecesarios, sin complejidad artificial.
-        </p>
-      </div>
-      <div class="about-stats reveal reveal-delay-2">
-        <div class="stat-box">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">Soluciones a medida</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-num">24/7</div>
-          <div class="stat-label">Automatización activa</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-num">0</div>
-          <div class="stat-label">Procesos manuales innecesarios</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-num">∞</div>
-          <div class="stat-label">Escalabilidad</div>
-        </div>
+<!-- ══ ABOUT ══ -->
+<section class="about" id="nosotros">
+  <div class="about-inner">
+    <div class="about-img-wrap reveal">
+      <img class="about-logo"
+           src="https://drive.google.com/thumbnail?id=150_1wJbjLG89iJFNfuK6bie4-5EgC92X&sz=w800"
+           alt="Menal Operations">
+      <div class="about-badge">
+        <div class="about-badge-val">∞</div>
+        <div class="about-badge-lbl">Escalabilidad</div>
       </div>
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section class="contact" id="contacto">
-    <div class="contact-inner">
-      <div class="reveal">
-        <div class="section-tag" style="margin: 0 auto 20px;"><span class="marquee-star">✦</span> Contacto</div>
-        <h2 class="section-title">¿Listo para<br><em>optimizar</em> tu negocio?</h2>
-        <p class="contact-sub">Cuéntanos tu desafío. Diseñamos la solución juntos.</p>
-      </div>
-      <div class="contact-cards reveal reveal-delay-1">
-        <a href="https://wa.me/573019861441" class="contact-card" target="_blank">
-          <div class="contact-card-ico">
-            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.122 1.529 5.857L.057 23.5l5.797-1.522A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.659-.52-5.168-1.425l-.371-.22-3.44.903.918-3.352-.241-.386A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          </div>
-          <div class="contact-card-text">
-            <strong>WhatsApp</strong>
-            <span>+57 301 986 1441</span>
-          </div>
-        </a>
-        <a href="mailto:contacto@menaloperations.com" class="contact-card">
-          <div class="contact-card-ico">
-            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          </div>
-          <div class="contact-card-text">
-            <strong>Email</strong>
-            <span>contacto@menaloperations.com</span>
-          </div>
-        </a>
-      </div>
+    <div class="about-text reveal d2">
+      <span class="section-label">// Quiénes somos</span>
+      <h2 class="section-title" style="margin-bottom:28px;">
+        Tecnología que<br><span>trabaja por ti</span>
+      </h2>
+      <p>En Menal Operations creemos que ninguna empresa debería perder tiempo en tareas que una máquina puede hacer mejor. Nos especializamos en convertir procesos manuales en sistemas automáticos, eficientes y confiables.</p>
+      <p>Trabajamos con negocios de todos los tamaños en Colombia, entregando soluciones que se adaptan a su realidad — rápidas de implementar, fáciles de usar y diseñadas para crecer contigo.</p>
+      <a href="#contacto" class="btn-dark">Conoce cómo podemos ayudarte</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-left">
-      <span class="footer-star">✦</span>
-      <span class="footer-copy">© 2026 Menal Operations. Todos los derechos reservados.</span>
+<!-- ══ CONTACT ══ -->
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <span class="section-label reveal">// Contacto</span>
+    <h2 class="section-title reveal">¿Listo para operar<br><span>en otro nivel?</span></h2>
+
+    <div class="contact-grid">
+      <a href="https://wa.me/573019861441" class="contact-card reveal d1" target="_blank" rel="noopener">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.122 1.529 5.857L.057 23.5l5.797-1.522A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.659-.52-5.168-1.425l-.371-.22-3.44.903.918-3.352-.241-.386A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        </div>
+        <div>
+          <span class="contact-type">WhatsApp</span>
+          <div class="contact-val">+57 301 986 1441</div>
+        </div>
+      </a>
+
+      <a href="mailto:contacto@menaloperations.com" class="contact-card reveal d2">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <div>
+          <span class="contact-type">Email</span>
+          <div class="contact-val">contacto@menaloperations.com</div>
+        </div>
+      </a>
     </div>
-    <a href="privacy.html" class="footer-copy" style="text-decoration:none;opacity:0.5;transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.5">Política de Privacidad</a>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-left">
+    <img class="footer-logo"
+         src="https://drive.google.com/thumbnail?id=150_1wJbjLG89iJFNfuK6bie4-5EgC92X&sz=w200"
+         alt="MO">
+    <span class="footer-copy">© 2026 Menal Operations · Colombia</span>
+  </div>
+  <a href="privacy.html" class="footer-link">Política de Privacidad</a>
+</footer>
 
-    // Nav shadow on scroll
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.style.boxShadow = window.scrollY > 40 ? '0 2px 24px rgba(27,42,74,0.08)' : '';
-    });
-  </script>
+<script>
+  /* ── Scroll reveal ── */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  /* ── Typewriter ── */
+  const words = ['Crece.', 'Escala.', 'Domina.'];
+  let wi = 0, ci = 0, deleting = false;
+  const target = document.getElementById('typeTarget');
+  function type() {
+    const word = words[wi];
+    if (!deleting) {
+      target.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      target.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+    }
+    setTimeout(type, deleting ? 60 : 100);
+  }
+  setTimeout(type, 800);
+
+  /* ── Nav shadow on scroll ── */
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.borderBottomColor = window.scrollY > 60
+      ? 'rgba(79,195,247,0.12)'
+      : 'rgba(255,255,255,0.07)';
+  });
+</script>
 </body>
 </html>
