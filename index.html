@@ -3,662 +3,550 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menal Operations — Tecnología que Transforma</title>
-  <meta name="description" content="Automatización, cobros inteligentes y sistemas a medida para empresas colombianas que quieren operar mejor.">
+  <title>Menal Operations — Ordena, Controla, Crece</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ══════════════════════════════
-       TOKENS
-    ══════════════════════════════ */
     :root {
-      --navy:      #1B2A4A;
-      --navy-2:    #162240;
-      --navy-3:    #0F1A30;
-      --lime:      #4FC3F7;
-      --lime-glow: rgba(79,195,247,0.18);
-      --lime-dim:  rgba(79,195,247,0.08);
-      --bg:        #F2F1ED;
-      --bg-2:      #E8E6E0;
-      --white:     #FFFFFF;
-      --muted:     rgba(255,255,255,0.42);
-      --muted-d:   #8A8780;
-      --border:    rgba(255,255,255,0.07);
-      --border-l:  rgba(27,42,74,0.10);
-      --fd:        'Syne', sans-serif;
-      --fm:        'IBM Plex Mono', monospace;
-      --fb:        'DM Sans', system-ui, sans-serif;
+      --navy: #1B2A4A;
+      --navy-mid: #243660;
+      --blue: #4FC3F7;
+      --blue-dim: rgba(79,195,247,0.12);
+      --bg: #F4F3F0;
+      --white: #FFFFFF;
+      --text-dark: rgba(27,42,74,0.6);
     }
 
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { font-family:var(--fb); background:var(--bg); color:var(--navy); overflow-x:hidden; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--navy); overflow-x: hidden; }
 
-    /* ══════════════════════════════
-       NOISE TEXTURE
-    ══════════════════════════════ */
-    body::after {
-      content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity:.5;
-    }
-
-    /* ══════════════════════════════
-       NAV
-    ══════════════════════════════ */
+    /* NAV */
     nav {
-      position:fixed; top:0; left:0; right:0; z-index:200;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:18px 56px;
-      background:rgba(27,42,74,0.95);
-      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-      border-bottom:1px solid var(--border);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 60px;
+      background: rgba(244,243,240,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(27,42,74,0.07);
+      transition: padding 0.3s;
     }
-    .nav-logo { height:40px; width:auto; object-fit:contain; display:block; }
-    .nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
+    nav.scrolled { padding: 12px 60px; }
+    .nav-logo img { height: 38px; width: auto; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a {
-      font-family:var(--fm); font-size:0.65rem; letter-spacing:2px;
-      text-transform:uppercase; color:var(--muted); text-decoration:none;
-      transition:color .2s;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--navy); text-decoration: none;
+      opacity: 0.5; transition: opacity 0.2s;
     }
-    .nav-links a:hover { color:#fff; }
+    .nav-links a:hover { opacity: 1; }
     .nav-cta {
-      font-family:var(--fm); font-size:0.65rem; letter-spacing:2px; text-transform:uppercase;
-      background:var(--lime); color:var(--white) !important;
-      padding:10px 22px; border-radius:2px;
-      transition:opacity .2s, transform .15s;
+      background: var(--navy) !important; color: var(--white) !important;
+      opacity: 1 !important; padding: 10px 22px; border-radius: 4px;
     }
-    .nav-cta:hover { opacity:.88; transform:translateY(-1px); }
+    .nav-cta:hover { background: var(--navy-mid) !important; opacity: 1 !important; }
 
-    /* ══════════════════════════════
-       HERO
-    ══════════════════════════════ */
+    /* HERO */
     .hero {
-      min-height:100vh; background:var(--navy-3);
-      display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
-      padding:140px 56px 80px; position:relative; overflow:hidden;
+      min-height: 100vh; background: var(--navy);
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; padding: 120px 40px 80px;
+      position: relative; overflow: hidden;
     }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(79,195,247,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,195,247,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -62%);
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, rgba(79,195,247,0.07) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
 
-    /* Animated dot grid */
-    .hero-grid {
-      position:absolute; inset:0; pointer-events:none;
-      background-image: radial-gradient(circle, rgba(79,195,247,0.12) 1px, transparent 1px);
-      background-size: 40px 40px;
-      animation: gridDrift 20s ease-in-out infinite alternate;
+    .hero-logo {
+      width: min(300px, 58vw);
+      margin-bottom: 48px;
+      filter: drop-shadow(0 0 48px rgba(79,195,247,0.14));
+      animation: fadeUp 1s ease both;
     }
-    @keyframes gridDrift {
-      from { background-position:0 0; }
-      to   { background-position:40px 40px; }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--blue); border: 1px solid rgba(79,195,247,0.3);
+      padding: 6px 18px; border-radius: 100px;
+      margin-bottom: 28px;
+      animation: fadeUp 1s 0.1s ease both;
     }
-
-    /* Glow orb */
-    .hero-orb {
-      position:absolute; right:-100px; top:50%; transform:translateY(-50%);
-      width:600px; height:600px; border-radius:50%;
-      background:radial-gradient(circle, rgba(79,195,247,0.06) 0%, transparent 70%);
-      pointer-events:none;
-    }
-
-    .hero-content { position:relative; z-index:1; max-width:900px; }
-
-    .hero-label {
-      display:inline-flex; align-items:center; gap:10px;
-      font-family:var(--fm); font-size:0.65rem; letter-spacing:3px; text-transform:uppercase;
-      color:var(--lime); margin-bottom:32px;
-      animation:fadeUp .8s .1s both;
-    }
-    .hero-label::before {
-      content:''; width:24px; height:1px; background:var(--lime);
-    }
-
     .hero-title {
-      font-family:var(--fd); font-size:clamp(3rem, 7vw, 6.5rem);
-      font-weight:800; line-height:1.02; letter-spacing:-0.03em;
-      color:#fff; margin-bottom:28px;
-      animation:fadeUp .8s .2s both;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      font-weight: 700; line-height: 1.12;
+      color: var(--white); margin-bottom: 14px;
+      animation: fadeUp 1s 0.18s ease both;
     }
-    .hero-title .lime { color:var(--lime); }
-    .hero-title .cursor {
-      display:inline-block; width:4px; height:.85em;
-      background:var(--lime); margin-left:4px; vertical-align:middle;
-      animation:blink 1s step-end infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
+    .hero-title .dim { color: rgba(255,255,255,0.3); font-weight: 400; }
+    .hero-title .accent { color: var(--blue); }
     .hero-sub {
-      font-size:1rem; line-height:1.78; color:var(--muted);
-      max-width:520px; margin-bottom:52px;
-      animation:fadeUp .8s .35s both;
+      font-size: 0.88rem; font-weight: 300;
+      color: rgba(255,255,255,0.4); margin-bottom: 48px;
+      animation: fadeUp 1s 0.26s ease both;
     }
+    .hero-cta {
+      display: inline-block;
+      background: var(--blue); color: var(--navy);
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 16px 40px; border-radius: 4px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeUp 1s 0.34s ease both;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,195,247,0.28); }
 
-    .hero-actions {
-      display:flex; gap:14px; flex-wrap:wrap;
-      animation:fadeUp .8s .45s both;
+    .scroll-hint {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0.25; animation: fadeUp 1s 0.7s ease both;
     }
+    .scroll-hint span { font-size: 0.58rem; letter-spacing: 3px; text-transform: uppercase; color: var(--white); }
+    .scroll-line { width: 1px; height: 36px; background: linear-gradient(var(--white), transparent); animation: pulse 2s infinite; }
 
-    .hero-stats {
-      display:flex; gap:0; margin-top:80px;
-      border-top:1px solid var(--border);
-      animation:fadeUp .8s .55s both;
+    /* ABOUT */
+    .about {
+      padding: 120px 60px; max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start;
     }
-    .stat {
-      padding:28px 40px 24px 0; margin-right:40px;
-      border-right:1px solid var(--border);
-    }
-    .stat:last-child { border-right:none; }
-    .stat-val {
-      font-family:var(--fd); font-size:2.2rem; font-weight:800;
-      color:var(--lime); line-height:1; margin-bottom:6px;
-    }
-    .stat-lbl {
-      font-family:var(--fm); font-size:0.6rem; letter-spacing:2px;
-      text-transform:uppercase; color:var(--muted);
-    }
-
-    /* BUTTONS */
-    .btn-lime {
-      background:var(--lime); color:var(--navy);
-      padding:15px 32px; font-family:var(--fd); font-weight:700;
-      font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase;
-      text-decoration:none; border-radius:2px; display:inline-block;
-      transition:opacity .2s, transform .15s;
-    }
-    .btn-lime:hover { opacity:.88; transform:translateY(-2px); }
-    .btn-ghost-light {
-      border:1.5px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.75);
-      padding:15px 32px; font-family:var(--fd); font-weight:600;
-      font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase;
-      text-decoration:none; border-radius:2px; display:inline-block;
-      transition:all .2s;
-    }
-    .btn-ghost-light:hover { border-color:#fff; color:#fff; transform:translateY(-2px); }
-    .btn-dark {
-      background:var(--navy); color:#fff;
-      padding:15px 32px; font-family:var(--fd); font-weight:700;
-      font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase;
-      text-decoration:none; border-radius:2px; display:inline-block;
-      transition:background .2s, transform .15s;
-    }
-    .btn-dark:hover { background:var(--navy-2); transform:translateY(-2px); }
-    .btn-ghost-dark {
-      border:1.5px solid rgba(27,42,74,0.25); color:var(--navy);
-      padding:15px 32px; font-family:var(--fd); font-weight:600;
-      font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase;
-      text-decoration:none; border-radius:2px; display:inline-block;
-      transition:all .2s;
-    }
-    .btn-ghost-dark:hover { background:var(--navy); color:#fff; transform:translateY(-2px); }
-
-    /* ══════════════════════════════
-       MARQUEE
-    ══════════════════════════════ */
-    .marquee-wrap {
-      background:var(--navy-2); padding:14px 0; overflow:hidden;
-    }
-    .marquee-track {
-      display:flex; width:max-content;
-      animation:marquee 28s linear infinite;
-    }
-    .marquee-item {
-      display:flex; align-items:center; gap:28px;
-      padding:0 28px; white-space:nowrap;
-      font-family:var(--fm); font-size:0.62rem; letter-spacing:3px; text-transform:uppercase;
-      color:rgba(255,255,255,0.5);
-    }
-    .marquee-dot { width:4px; height:4px; background:var(--lime); border-radius:50%; opacity:.6; }
-    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    /* ══════════════════════════════
-       SERVICES
-    ══════════════════════════════ */
-    .services { padding:120px 56px; background:var(--bg); }
-    .services-inner { max-width:1280px; margin:0 auto; }
-
     .section-label {
-      font-family:var(--fm); font-size:0.62rem; letter-spacing:3.5px; text-transform:uppercase;
-      color:var(--navy); opacity:.45; margin-bottom:16px; display:block;
+      font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--blue); font-weight: 600;
+      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
     }
+    .section-label::before { content: ''; display: block; width: 22px; height: 2px; background: var(--blue); }
     .section-title {
-      font-family:var(--fd); font-size:clamp(2rem, 4vw, 3.6rem);
-      font-weight:800; line-height:1.06; letter-spacing:-0.025em;
-      color:var(--navy); margin-bottom:72px;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em; margin-bottom: 20px;
     }
-    .section-title span { color:var(--navy); opacity:.28; }
+    .about-text { font-size: 0.9rem; line-height: 1.85; color: var(--text-dark); margin-bottom: 14px; }
+    .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 36px; }
+    .highlight-box {
+      background: var(--white); padding: 22px 18px;
+      border-top: 2px solid transparent; transition: border-color 0.3s;
+    }
+    .highlight-box:hover { border-color: var(--blue); }
+    .highlight-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem; font-weight: 800; color: var(--navy); line-height: 1; margin-bottom: 4px;
+    }
+    .highlight-label { font-size: 0.7rem; letter-spacing: 0.5px; color: var(--text-dark); line-height: 1.4; }
 
-    .svc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:3px; }
+    /* SERVICES */
+    .services-section { background: var(--navy); padding: 100px 60px; position: relative; overflow: hidden; }
+    .services-section::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(79,195,247,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,195,247,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .services-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .services-section .section-label { color: var(--blue); }
+    .services-section .section-title { color: var(--white); }
+    .services-header { margin-bottom: 56px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .service-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 36px 28px; position: relative; overflow: hidden;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .service-card:hover { background: rgba(79,195,247,0.06); transform: translateY(-4px); }
+    .service-number {
+      font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800;
+      color: rgba(255,255,255,0.04);
+      position: absolute; top: 12px; right: 16px; line-height: 1;
+    }
+    .service-icon {
+      width: 38px; height: 38px; background: var(--blue-dim);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px; color: var(--blue);
+    }
+    .service-name {
+      font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .service-desc { font-size: 0.82rem; line-height: 1.7; color: rgba(255,255,255,0.42); }
 
-    .svc-card {
-      background:var(--white); padding:52px 44px 44px;
-      position:relative; overflow:hidden;
-      transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s;
-      cursor:default;
+    /* PHASES */
+    .phases-section { padding: 120px 60px; }
+    .phases-inner { max-width: 1100px; margin: 0 auto; }
+    .phase1-card {
+      background: var(--white); padding: 56px;
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px;
+      align-items: start; margin-bottom: 80px;
+      border-left: 4px solid var(--navy);
     }
-    .svc-card:hover {
-      transform:translateY(-5px);
-      box-shadow:0 20px 60px rgba(27,42,74,0.10);
+    .phase-badge {
+      display: inline-block; font-size: 0.58rem; letter-spacing: 3px;
+      text-transform: uppercase; background: var(--navy); color: var(--white);
+      padding: 5px 12px; border-radius: 2px; margin-bottom: 14px;
     }
-    .svc-card::after {
-      content:''; position:absolute; inset:0;
-      border-bottom:2px solid var(--lime);
-      transform:scaleX(0); transform-origin:left;
-      transition:transform .45s cubic-bezier(.25,.46,.45,.94);
+    .phase-title {
+      font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 12px;
     }
-    .svc-card:hover::after { transform:scaleX(1); }
+    .phase-desc { font-size: 0.87rem; color: var(--text-dark); line-height: 1.75; }
+    .phase-price {
+      font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+      color: var(--navy); margin-top: 24px;
+    }
+    .phase-price span { font-size: 0.8rem; font-weight: 400; color: var(--text-dark); }
+    .phase-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; }
+    .phase-list li {
+      font-size: 0.83rem; line-height: 1.5; color: var(--text-dark);
+      padding-left: 16px; position: relative;
+    }
+    .phase-list li::before {
+      content: ''; position: absolute; left: 0; top: 8px;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--blue);
+    }
+    .phase2-header { margin-bottom: 40px; }
+    .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .plan-card {
+      background: var(--white); padding: 36px 28px;
+      border-top: 3px solid transparent;
+      transition: border-color 0.3s, transform 0.3s; position: relative;
+    }
+    .plan-card:hover { transform: translateY(-4px); border-color: var(--blue); }
+    .plan-card.featured { border-color: var(--navy); }
+    .plan-card.featured::after {
+      content: 'MÁS POPULAR';
+      position: absolute; top: -1px; right: 20px;
+      background: var(--navy); color: var(--white);
+      font-size: 0.52rem; letter-spacing: 2px; padding: 4px 10px;
+    }
+    .plan-name { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .plan-price { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .plan-period { font-size: 0.72rem; color: var(--text-dark); margin-bottom: 24px; }
+    .plan-divider { height: 1px; background: rgba(27,42,74,0.08); margin-bottom: 22px; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .plan-features li {
+      font-size: 0.8rem; color: var(--text-dark); line-height: 1.45;
+      padding-left: 18px; position: relative;
+    }
+    .plan-features li::before { content: '✓'; position: absolute; left: 0; color: var(--blue); font-size: 0.72rem; font-weight: 700; }
 
-    .svc-tag {
-      font-family:var(--fm); font-size:0.58rem; letter-spacing:3px; text-transform:uppercase;
-      color:var(--lime); background:var(--navy);
-      display:inline-block; padding:4px 10px; border-radius:2px; margin-bottom:28px;
+    /* CONTACT */
+    .contact-section {
+      background: var(--navy); padding: 100px 60px;
+      text-align: center; position: relative; overflow: hidden;
     }
-    .svc-icon {
-      width:48px; height:48px; margin-bottom:24px;
-      color:var(--navy); opacity:.2;
-      transition:opacity .3s, color .3s;
+    .contact-section::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(79,195,247,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,195,247,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
-    .svc-card:hover .svc-icon { opacity:1; color:var(--navy); }
-    .svc-name {
-      font-family:var(--fd); font-size:1.7rem; font-weight:700;
-      letter-spacing:-0.02em; margin-bottom:14px; color:var(--navy);
-    }
-    .svc-desc {
-      font-size:0.88rem; line-height:1.78; color:var(--muted-d);
-    }
-    .svc-num {
-      position:absolute; bottom:20px; right:28px;
-      font-family:var(--fd); font-size:5.5rem; font-weight:800;
-      color:var(--navy); opacity:.04; line-height:1; user-select:none;
-    }
-
-    /* ══════════════════════════════
-       PROCESS
-    ══════════════════════════════ */
-    .process { background:var(--navy); padding:120px 56px; }
-    .process-inner { max-width:1280px; margin:0 auto; }
-    .process .section-label { color:var(--lime); opacity:1; }
-    .process .section-title { color:#fff; margin-bottom:80px; }
-    .process .section-title span { color:#fff; opacity:.2; }
-
-    .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
-    .step {
-      background:rgba(255,255,255,0.03); padding:48px 36px;
-      border-top:2px solid rgba(255,255,255,0.06);
-      transition:border-color .3s, background .3s;
-    }
-    .step:hover { border-color:var(--lime); background:rgba(255,255,255,0.05); }
-    .step-num {
-      font-family:var(--fm); font-size:0.62rem; letter-spacing:3px;
-      color:var(--lime); margin-bottom:24px; display:block;
-    }
-    .step-title {
-      font-family:var(--fd); font-size:1.35rem; font-weight:700;
-      color:#fff; margin-bottom:14px; letter-spacing:-0.01em;
-    }
-    .step-desc { font-size:0.86rem; line-height:1.75; color:var(--muted); }
-
-    /* ══════════════════════════════
-       ABOUT
-    ══════════════════════════════ */
-    .about { background:var(--bg-2); padding:120px 56px; }
-    .about-inner {
-      max-width:1280px; margin:0 auto;
-      display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
-    }
-    .about-img-wrap {
-      position:relative; display:flex; align-items:center; justify-content:center;
-    }
-    .about-logo {
-      width:70%; max-width:280px; opacity:.12;
-      filter:blur(0px);
-    }
-    .about-badge {
-      position:absolute; bottom:-10px; right:0;
-      background:var(--navy); padding:20px 24px; border-radius:2px;
-    }
-    .about-badge-val {
-      font-family:var(--fd); font-size:1.8rem; font-weight:800;
-      color:var(--lime); line-height:1; margin-bottom:4px;
-    }
-    .about-badge-lbl {
-      font-family:var(--fm); font-size:0.58rem; letter-spacing:2px;
-      text-transform:uppercase; color:rgba(255,255,255,.4);
-    }
-    .about-text p {
-      font-size:0.92rem; line-height:1.82; color:var(--muted-d); margin-bottom:16px;
-    }
-    .about-text p:last-of-type { margin-bottom:32px; }
-
-    /* ══════════════════════════════
-       CONTACT
-    ══════════════════════════════ */
-    .contact { background:var(--navy-3); padding:120px 56px; }
-    .contact-inner { max-width:1280px; margin:0 auto; }
-    .contact .section-label { color:var(--lime); opacity:1; }
-    .contact .section-title { color:#fff; margin-bottom:56px; }
-    .contact .section-title span { color:#fff; opacity:.2; }
-
-    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
+    .contact-inner { position: relative; z-index: 1; max-width: 580px; margin: 0 auto; }
+    .contact-section .section-label { justify-content: center; color: var(--blue); }
+    .contact-section .section-title { color: var(--white); margin-bottom: 12px; }
+    .contact-sub { font-size: 0.88rem; color: rgba(255,255,255,0.4); margin-bottom: 44px; }
+    .contact-cards { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
     .contact-card {
-      background:rgba(255,255,255,0.04); padding:40px 36px;
-      border:1px solid var(--border); border-radius:0;
-      text-decoration:none; color:#fff; display:flex; align-items:center; gap:20px;
-      transition:background .25s, border-color .25s, transform .2s;
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      padding: 14px 22px; border-radius: 4px;
+      text-decoration: none; color: var(--white); font-size: 0.83rem;
+      transition: background 0.2s, transform 0.2s;
     }
-    .contact-card:hover {
-      background:rgba(79,195,247,0.06); border-color:rgba(79,195,247,0.25);
-      transform:translateY(-3px);
+    .contact-card:hover { background: rgba(79,195,247,0.1); transform: translateY(-2px); }
+    .contact-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+    .contact-cta {
+      display: inline-block; background: var(--blue); color: var(--navy);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 17px 44px; border-radius: 4px; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .contact-icon {
-      width:44px; height:44px; border-radius:50%;
-      background:var(--lime-dim); border:1px solid rgba(79,195,247,0.2);
-      display:flex; align-items:center; justify-content:center; flex-shrink:0;
-    }
-    .contact-icon svg { width:18px; height:18px; fill:var(--lime); }
-    .contact-type {
-      font-family:var(--fm); font-size:0.6rem; letter-spacing:2.5px;
-      text-transform:uppercase; color:var(--lime); margin-bottom:4px; display:block;
-    }
-    .contact-val { font-family:var(--fd); font-size:1.1rem; font-weight:700; color:#fff; }
+    .contact-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,195,247,0.3); }
 
-    /* ══════════════════════════════
-       FOOTER
-    ══════════════════════════════ */
-    footer {
-      background:var(--navy); padding:32px 56px;
-      display:flex; align-items:center; justify-content:space-between;
-      border-top:1px solid var(--border);
-    }
-    .footer-left { display:flex; align-items:center; gap:20px; }
-    .footer-logo { height:28px; width:auto; object-fit:contain; opacity:.6; }
-    .footer-copy {
-      font-family:var(--fm); font-size:0.62rem; letter-spacing:1px;
-      color:rgba(255,255,255,.25);
-    }
-    .footer-link {
-      font-family:var(--fm); font-size:0.62rem; letter-spacing:1px;
-      color:rgba(255,255,255,.25); text-decoration:none;
-      transition:color .2s;
-    }
-    .footer-link:hover { color:var(--lime); }
+    /* FOOTER */
+    footer { background: #111D30; padding: 32px 60px; display: flex; justify-content: space-between; align-items: center; }
+    footer img { height: 30px; width: auto; opacity: 0.6; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.65); }
+    .footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.18); }
 
-    /* ══════════════════════════════
-       ANIMATIONS
-    ══════════════════════════════ */
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(30px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    .reveal {
-      opacity:0; transform:translateY(40px);
-      transition:opacity .8s ease, transform .8s ease;
-    }
-    .reveal.in { opacity:1; transform:none; }
-    .d1 { transition-delay:.08s; }
-    .d2 { transition-delay:.16s; }
-    .d3 { transition-delay:.24s; }
-    .d4 { transition-delay:.32s; }
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
 
-    /* ══════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════ */
-    @media (max-width:1024px) {
-      .svc-grid  { grid-template-columns:1fr; }
-      .steps     { grid-template-columns:1fr; }
-      .about-inner { grid-template-columns:1fr; }
-      .about-img-wrap { display:none; }
-      .contact-grid { grid-template-columns:1fr; }
-    }
-    @media (max-width:768px) {
-      nav { padding:16px 24px; }
-      .nav-links { display:none; }
-      .hero, .services, .process, .about, .contact { padding-left:24px; padding-right:24px; }
-      .hero { padding-top:110px; padding-bottom:56px; }
-      .hero-stats { flex-direction:column; gap:0; }
-      .stat { border-right:none; border-bottom:1px solid var(--border); padding:20px 0; margin-right:0; }
-      footer { padding:24px; flex-direction:column; gap:12px; text-align:center; }
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .about { grid-template-columns: 1fr; padding: 80px 24px; gap: 40px; }
+      .services-section, .phases-section, .contact-section { padding: 80px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .phase1-card { grid-template-columns: 1fr; padding: 36px 24px; gap: 36px; }
+      .plans-grid { grid-template-columns: 1fr; }
+      .about-highlights { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 24px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
-<nav>
-  <a href="#">
-    <img class="nav-logo"
-         src="https://drive.google.com/thumbnail?id=150_1wJbjLG89iJFNfuK6bie4-5EgC92X&sz=w200"
-         alt="Menal Operations">
-  </a>
-  <ul class="nav-links">
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#proceso">Proceso</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="https://drive.google.com/thumbnail?id=1BUyzn_VD0YTPCBGTUOyoItz_NgbE-Hli&sz=w200" alt="Menal Operations">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#contacto" class="nav-cta">Agendar reunión</a></li>
+    </ul>
+  </nav>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-orb"></div>
-
-  <div class="hero-content">
-    <div class="hero-label">Menal Operations · Tecnología Empresarial</div>
-
-    <h1 class="hero-title">
-      Automatiza.<br>
-      <span class="lime" id="typeTarget"></span><span class="cursor"></span>
-    </h1>
-
-    <p class="hero-sub">
-      Diseñamos e implementamos sistemas tecnológicos que eliminan el trabajo manual, aceleran los cobros y escalan contigo — sin fricción, sin límites.
-    </p>
-
-    <div class="hero-actions">
-      <a href="#contacto" class="btn-lime">Hablemos de tu proyecto</a>
-      <a href="#servicios" class="btn-ghost-light">Ver servicios</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <img class="hero-logo" src="https://drive.google.com/thumbnail?id=19MLgSUY9mY1WGsS-p5quLwUfHAc40gHS&sz=w600" alt="Menal Operations">
+      <div class="hero-tag">Sistemas a tu medida</div>
+      <h1 class="hero-title">
+        Ordena tu operación.<br>
+        <span class="dim">Controla tus ventas.</span><br>
+        Haz crecer tu empresa con <span class="accent">data.</span>
+      </h1>
+      <p class="hero-sub">Ing. Edgardo Mendoza — CEO / Founder</p>
+      <a href="#contacto" class="hero-cta">Agendemos nuestra primera reunión</a>
     </div>
-
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-val">100%</div>
-        <div class="stat-lbl">Soluciones a medida</div>
-      </div>
-      <div class="stat">
-        <div class="stat-val">24/7</div>
-        <div class="stat-lbl">Automatización activa</div>
-      </div>
-      <div class="stat">
-        <div class="stat-val">0</div>
-        <div class="stat-lbl">Procesos manuales innecesarios</div>
-      </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ MARQUEE ══ -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item">Automatización de Procesos <span class="marquee-dot"></span> Gestión de Cobros <span class="marquee-dot"></span> Sistemas a Medida <span class="marquee-dot"></span> Consultoría Tecnológica <span class="marquee-dot"></span> WhatsApp Business API <span class="marquee-dot"></span> Google Apps Script <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Automatización de Procesos <span class="marquee-dot"></span> Gestión de Cobros <span class="marquee-dot"></span> Sistemas a Medida <span class="marquee-dot"></span> Consultoría Tecnológica <span class="marquee-dot"></span> WhatsApp Business API <span class="marquee-dot"></span> Google Apps Script <span class="marquee-dot"></span></div>
-  </div>
-</div>
-
-<!-- ══ SERVICES ══ -->
-<section class="services" id="servicios">
-  <div class="services-inner">
-    <span class="section-label reveal">// Lo que hacemos</span>
-    <h2 class="section-title reveal">Servicios que mueven<br><span>el negocio hacia adelante</span></h2>
-
-    <div class="svc-grid">
-
-      <div class="svc-card reveal d1">
-        <span class="svc-tag">01 · Automatización</span>
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-        </svg>
-        <h3 class="svc-name">Automatización de Procesos</h3>
-        <p class="svc-desc">Convertimos tareas repetitivas en flujos automáticos. Reportes, notificaciones, registros y más — corriendo solos mientras tú te concentras en crecer.</p>
-        <span class="svc-num">01</span>
+  <!-- ABOUT -->
+  <section id="nosotros" style="background:var(--bg);">
+    <div class="about">
+      <div class="reveal">
+        <div class="section-label">Nosotros</div>
+        <h2 class="section-title">Más control.<br>Mejores decisiones.<br>Más crecimiento.</h2>
       </div>
-
-      <div class="svc-card reveal d2">
-        <span class="svc-tag">02 · Cobros</span>
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-        </svg>
-        <h3 class="svc-name">Cobros Inteligentes</h3>
-        <p class="svc-desc">Sistema de cobros automatizado vía WhatsApp Business API. Recordatorios en el momento exacto, seguimiento de mora y reportes en tiempo real.</p>
-        <span class="svc-num">02</span>
-      </div>
-
-      <div class="svc-card reveal d3">
-        <span class="svc-tag">03 · Desarrollo</span>
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-        </svg>
-        <h3 class="svc-name">Sistemas a Medida</h3>
-        <p class="svc-desc">Desarrollamos herramientas diseñadas exactamente para tu operación — paneles de control, integraciones, bases de datos y aplicaciones web sin fricción.</p>
-        <span class="svc-num">03</span>
-      </div>
-
-      <div class="svc-card reveal d4">
-        <span class="svc-tag">04 · Estrategia</span>
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-        </svg>
-        <h3 class="svc-name">Consultoría Tecnológica</h3>
-        <p class="svc-desc">Analizamos tu operación actual e identificamos dónde la tecnología puede darte más ventaja competitiva — con hoja de ruta clara y sin rodeos.</p>
-        <span class="svc-num">04</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ PROCESS ══ -->
-<section class="process" id="proceso">
-  <div class="process-inner">
-    <span class="section-label reveal">// Cómo trabajamos</span>
-    <h2 class="section-title reveal">Simple. Rápido.<br><span>Sin complicaciones.</span></h2>
-
-    <div class="steps">
-      <div class="step reveal d1">
-        <span class="step-num">PASO · 01</span>
-        <h3 class="step-title">Diagnóstico</h3>
-        <p class="step-desc">Entendemos tu operación, tus cuellos de botella y tus objetivos. Sin tecnicismos — hablamos tu idioma.</p>
-      </div>
-      <div class="step reveal d2">
-        <span class="step-num">PASO · 02</span>
-        <h3 class="step-title">Diseño y Desarrollo</h3>
-        <p class="step-desc">Construimos la solución a tu medida, iterando rápido y manteniéndote informado en cada etapa.</p>
-      </div>
-      <div class="step reveal d3">
-        <span class="step-num">PASO · 03</span>
-        <h3 class="step-title">Implementación</h3>
-        <p class="step-desc">Desplegamos, probamos y te entregamos todo funcionando. Con soporte para que la transición sea sin fricción.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ ABOUT ══ -->
-<section class="about" id="nosotros">
-  <div class="about-inner">
-    <div class="about-img-wrap reveal">
-      <img class="about-logo"
-           src="https://drive.google.com/thumbnail?id=150_1wJbjLG89iJFNfuK6bie4-5EgC92X&sz=w800"
-           alt="Menal Operations">
-      <div class="about-badge">
-        <div class="about-badge-val">∞</div>
-        <div class="about-badge-lbl">Escalabilidad</div>
-      </div>
-    </div>
-
-    <div class="about-text reveal d2">
-      <span class="section-label">// Quiénes somos</span>
-      <h2 class="section-title" style="margin-bottom:28px;">
-        Tecnología que<br><span>trabaja por ti</span>
-      </h2>
-      <p>En Menal Operations creemos que ninguna empresa debería perder tiempo en tareas que una máquina puede hacer mejor. Nos especializamos en convertir procesos manuales en sistemas automáticos, eficientes y confiables.</p>
-      <p>Trabajamos con negocios de todos los tamaños en Colombia, entregando soluciones que se adaptan a su realidad — rápidas de implementar, fáciles de usar y diseñadas para crecer contigo.</p>
-      <a href="#contacto" class="btn-dark">Conoce cómo podemos ayudarte</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CONTACT ══ -->
-<section class="contact" id="contacto">
-  <div class="contact-inner">
-    <span class="section-label reveal">// Contacto</span>
-    <h2 class="section-title reveal">¿Listo para operar<br><span>en otro nivel?</span></h2>
-
-    <div class="contact-grid">
-      <a href="https://wa.me/573019861441" class="contact-card reveal d1" target="_blank" rel="noopener">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.122 1.529 5.857L.057 23.5l5.797-1.522A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.659-.52-5.168-1.425l-.371-.22-3.44.903.918-3.352-.241-.386A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      <div class="reveal d1">
+        <p class="about-text">En <strong>Menal Operations</strong> diseñamos un sistema personalizado para tu empresa, organizamos la operación de todas las áreas y convertimos la información diaria en data clara y medible.</p>
+        <p class="about-text">Para <strong>optimizar procesos, aumentar la rentabilidad</strong> en el tiempo y tener un mejor control administrativo.</p>
+        <div class="about-highlights">
+          <div class="highlight-box">
+            <div class="highlight-num">100%</div>
+            <div class="highlight-label">Sistema a tu medida</div>
+          </div>
+          <div class="highlight-box">
+            <div class="highlight-num">Data</div>
+            <div class="highlight-label">Decisiones basadas en información real</div>
+          </div>
+          <div class="highlight-box">
+            <div class="highlight-num">End-to-end</div>
+            <div class="highlight-label">Flujo operativo completo</div>
+          </div>
+          <div class="highlight-box">
+            <div class="highlight-num">30 días</div>
+            <div class="highlight-label">Acompañamiento inicial incluido</div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section" id="servicios">
+    <div class="services-inner">
+      <div class="services-header reveal">
+        <div class="section-label">Nuestra solución</div>
+        <h2 class="section-title">Centralizamos la operación<br>de tu empresa.</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <span class="service-number">01</span>
+          <div class="service-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="service-name">App Web Personalizada</div>
+          <div class="service-desc">Diseñamos tu app a medida para gestionar ventas, producción y operaciones desde cualquier dispositivo.</div>
+        </div>
+        <div class="service-card reveal d1">
+          <span class="service-number">02</span>
+          <div class="service-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="service-name">Base de Control en Sheets</div>
+          <div class="service-desc">Centralizamos toda la información en Google Sheets con acceso exclusivo de administración.</div>
+        </div>
+        <div class="service-card reveal d2">
+          <span class="service-number">03</span>
+          <div class="service-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="service-name">Dashboards de Control</div>
+          <div class="service-desc">Visualiza métricas comerciales y operativas en tiempo real para decisiones más inteligentes.</div>
+        </div>
+        <div class="service-card reveal">
+          <span class="service-number">04</span>
+          <div class="service-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="service-name">Base de Datos de Clientes</div>
+          <div class="service-desc">Gestión completa de tu cartera, historial y seguimiento para potenciar tus ventas.</div>
+        </div>
+        <div class="service-card reveal d1">
+          <span class="service-number">05</span>
+          <div class="service-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div class="service-name">Gestión de Inventarios</div>
+          <div class="service-desc">Control preciso de stock con alertas automáticas para nunca quedarte sin producto clave.</div>
+        </div>
+        <div class="service-card reveal d2">
+          <span class="service-number">06</span>
+          <div class="service-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div class="service-name">Flujo de Producción</div>
+          <div class="service-desc">Estructura y automatiza tu flujo end-to-end para maximizar eficiencia y reducir errores operativos.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASES -->
+  <section class="phases-section" id="planes">
+    <div class="phases-inner">
+
+      <!-- Fase 1 -->
+      <div class="phase1-card reveal">
         <div>
-          <span class="contact-type">WhatsApp</span>
-          <div class="contact-val">+57 301 986 1441</div>
+          <span class="phase-badge">Fase 1</span>
+          <h3 class="phase-title">Integración Operativa</h3>
+          <p class="phase-desc">Nos tomamos el tiempo de conocerte y ajustamos nuestro trabajo a lo que necesita tu empresa. Diseñamos e implementamos el sistema completo desde cero.</p>
+          <div class="phase-price">$3.000.000 <span>COP — Inversión única</span></div>
         </div>
-      </a>
+        <ul class="phase-list">
+          <li>Diseño e implementación del sistema integral</li>
+          <li>Centralización de información en Google Sheets</li>
+          <li>Desarrollo de app web personalizada</li>
+          <li>Estructuración del flujo operativo end-to-end</li>
+          <li>Configuración del sistema de producción</li>
+          <li>Capacitación al equipo clave</li>
+          <li>Acompañamiento y ajustes primeros 30 días</li>
+        </ul>
+      </div>
 
-      <a href="mailto:contacto@menaloperations.com" class="contact-card reveal d2">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      <!-- Fase 2 -->
+      <div class="phase2-header reveal">
+        <div class="section-label">Fase 2</div>
+        <h2 class="section-title">Optimización y Acompañamiento Estratégico</h2>
+        <p style="font-size:0.88rem;color:var(--text-dark);margin-top:8px;">Elige un plan mensual para continuar creciendo juntos.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card reveal">
+          <div class="plan-name">Plan Esencial</div>
+          <div class="plan-price">$600.000</div>
+          <div class="plan-period">COP / mes</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li>Soporte técnico preventivo</li>
+            <li>Hasta 2 ajustes mayores al mes</li>
+            <li>Mantenimiento de base de datos</li>
+            <li>Atención vía WhatsApp en horario laboral</li>
+          </ul>
         </div>
-        <div>
-          <span class="contact-type">Email</span>
-          <div class="contact-val">contacto@menaloperations.com</div>
+        <div class="plan-card featured reveal d1">
+          <div class="plan-name">Plan Profesional</div>
+          <div class="plan-price">$1.200.000</div>
+          <div class="plan-period">COP / mes</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li>Soporte técnico completo</li>
+            <li>Hasta 4 ajustes mayores al mes</li>
+            <li>Ajustes técnicos menores ilimitados</li>
+            <li>2 sesiones virtuales de asesoría operativa</li>
+            <li>Acompañamiento en decisiones estratégicas</li>
+            <li>Análisis de datos mensual</li>
+          </ul>
         </div>
-      </a>
+        <div class="plan-card reveal d2">
+          <div class="plan-name">Plan Ejecutivo</div>
+          <div class="plan-price">$1.800.000</div>
+          <div class="plan-period">COP / mes</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li>Soporte técnico prioritario</li>
+            <li>Ajustes técnicos continuos</li>
+            <li>1 visita semanal de asesoría presencial</li>
+            <li>Identificación de cuellos de botella</li>
+            <li>Optimización de producción semanal</li>
+            <li>Reporte mensual de analytics y KPIs</li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="footer-left">
-    <img class="footer-logo"
-         src="https://drive.google.com/thumbnail?id=150_1wJbjLG89iJFNfuK6bie4-5EgC92X&sz=w200"
-         alt="MO">
-    <span class="footer-copy">© 2026 Menal Operations · Colombia</span>
-  </div>
-  <a href="privacy.html" class="footer-link">Política de Privacidad</a>
-</footer>
+  <!-- CONTACT -->
+  <section class="contact-section" id="contacto">
+    <div class="contact-inner">
+      <div class="section-label reveal">Contacto</div>
+      <h2 class="section-title reveal">Orden, control y crecimiento<br>exponencial a través de tu data.</h2>
+      <p class="contact-sub reveal">¡Agendemos nuestra primera reunión!</p>
+      <div class="contact-cards reveal">
+        <a href="tel:+573017551808" class="contact-card">
+          <div class="contact-dot"></div>+57 301 755 1808
+        </a>
+        <a href="mailto:menalingenieria@gmail.com" class="contact-card">
+          <div class="contact-dot"></div>menalingenieria@gmail.com
+        </a>
+      </div>
+      <a href="mailto:menalingenieria@gmail.com" class="contact-cta reveal">Agendar reunión →</a>
+    </div>
+  </section>
 
-<script>
-  /* ── Scroll reveal ── */
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  <!-- FOOTER -->
+  <footer>
+    <img src="https://drive.google.com/thumbnail?id=19MLgSUY9mY1WGsS-p5quLwUfHAc40gHS&sz=w200" alt="Menal Operations">
+    <div class="footer-links">
+      <a href="privacy.html">Política de Privacidad</a>
+    </div>
+    <p class="footer-copy">© 2025 Menal Operations</p>
+  </footer>
 
-  /* ── Typewriter ── */
-  const words = ['Crece.', 'Escala.', 'Domina.'];
-  let wi = 0, ci = 0, deleting = false;
-  const target = document.getElementById('typeTarget');
-  function type() {
-    const word = words[wi];
-    if (!deleting) {
-      target.textContent = word.slice(0, ++ci);
-      if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
-    } else {
-      target.textContent = word.slice(0, --ci);
-      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
-    }
-    setTimeout(type, deleting ? 60 : 100);
-  }
-  setTimeout(type, 800);
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
 
-  /* ── Nav shadow on scroll ── */
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    nav.style.borderBottomColor = window.scrollY > 60
-      ? 'rgba(79,195,247,0.12)'
-      : 'rgba(255,255,255,0.07)';
-  });
-</script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
