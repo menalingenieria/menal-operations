@@ -51,9 +51,8 @@
     /* HERO */
     .hero {
       min-height: 100vh; background: var(--navy);
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      text-align: center; padding: 120px 40px 80px;
+      display: flex; align-items: center;
+      padding: 120px 60px 80px;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -66,51 +65,52 @@
     }
     .hero::after {
       content: '';
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -62%);
-      width: 560px; height: 560px;
-      background: radial-gradient(circle, rgba(79,195,247,0.07) 0%, transparent 68%);
+      position: absolute; top: 50%; left: 30%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(79,195,247,0.06) 0%, transparent 68%);
       pointer-events: none;
     }
-    .hero-content { position: relative; z-index: 1; }
-
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 80px; align-items: center;
+    }
+    .hero-logo-wrap { display: flex; justify-content: center; align-items: center; }
     .hero-logo {
-      width: min(300px, 58vw);
-      margin-bottom: 48px;
+      width: min(280px, 40vw);
       filter: drop-shadow(0 0 48px rgba(79,195,247,0.14));
       animation: fadeUp 1s ease both;
     }
+    .hero-text { animation: fadeUp 1s 0.1s ease both; }
     .hero-tag {
       display: inline-block;
       font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
       color: var(--blue); border: 1px solid rgba(79,195,247,0.3);
       padding: 6px 18px; border-radius: 100px;
       margin-bottom: 28px;
-      animation: fadeUp 1s 0.1s ease both;
     }
     .hero-title {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(2rem, 5vw, 4.2rem);
+      font-size: clamp(1.9rem, 4vw, 3.6rem);
       font-weight: 700; line-height: 1.12;
       color: var(--white); margin-bottom: 14px;
-      animation: fadeUp 1s 0.18s ease both;
     }
     .hero-title .dim { color: rgba(255,255,255,0.3); font-weight: 400; }
     .hero-title .accent { color: var(--blue); }
     .hero-sub {
       font-size: 0.88rem; font-weight: 300;
-      color: rgba(255,255,255,0.4); margin-bottom: 48px;
-      animation: fadeUp 1s 0.26s ease both;
+      color: rgba(255,255,255,0.4); margin-bottom: 40px;
     }
     .hero-cta {
       display: inline-block;
       background: var(--blue); color: var(--navy);
       font-size: 0.75rem; font-weight: 700;
       letter-spacing: 1.5px; text-transform: uppercase;
-      padding: 16px 40px; border-radius: 4px;
+      padding: 16px 36px; border-radius: 4px;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
-      animation: fadeUp 1s 0.34s ease both;
     }
     .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,195,247,0.28); }
 
@@ -191,10 +191,10 @@
 
     /* PHASES */
     .phases-section { padding: 120px 60px; }
-    .phases-inner { max-width: 1100px; margin: 0 auto; }
+    .phases-inner { max-width: 900px; margin: 0 auto; }
     .phase1-card {
-      background: var(--white); padding: 56px;
-      display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px;
+      background: var(--white); padding: 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
       align-items: start; margin-bottom: 80px;
       border-left: 4px solid var(--navy);
     }
@@ -222,9 +222,9 @@
       width: 5px; height: 5px; border-radius: 50%; background: var(--blue);
     }
     .phase2-header { margin-bottom: 40px; }
-    .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 900px; }
     .plan-card {
-      background: var(--white); padding: 36px 28px;
+      background: var(--white); padding: 32px 24px;
       border-top: 3px solid transparent;
       transition: border-color 0.3s, transform 0.3s; position: relative;
     }
@@ -302,10 +302,14 @@
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
+      .hero { padding: 100px 24px 80px; }
+      .hero-content { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+      .hero-logo { width: min(200px, 50vw); }
+      .hero-tag { display: inline-block; }
       .about { grid-template-columns: 1fr; padding: 80px 24px; gap: 40px; }
       .services-section, .phases-section, .contact-section { padding: 80px 24px; }
       .services-grid { grid-template-columns: 1fr; }
-      .phase1-card { grid-template-columns: 1fr; padding: 36px 24px; gap: 36px; }
+      .phase1-card { grid-template-columns: 1fr; padding: 32px 20px; gap: 28px; }
       .plans-grid { grid-template-columns: 1fr; }
       .about-highlights { grid-template-columns: 1fr 1fr; }
       footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 24px; }
@@ -329,15 +333,19 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <img class="hero-logo" src="https://drive.google.com/thumbnail?id=19MLgSUY9mY1WGsS-p5quLwUfHAc40gHS&sz=w600" alt="Menal Operations">
-      <div class="hero-tag">Sistemas a tu medida</div>
-      <h1 class="hero-title">
-        Ordena tu operación.<br>
-        <span class="dim">Controla tus ventas.</span><br>
-        Haz crecer tu empresa con <span class="accent">data.</span>
-      </h1>
-      <p class="hero-sub">Ing. Edgardo Mendoza — CEO / Founder</p>
-      <a href="#contacto" class="hero-cta">Agendemos nuestra primera reunión</a>
+      <div class="hero-logo-wrap">
+        <img class="hero-logo" src="https://drive.google.com/thumbnail?id=19MLgSUY9mY1WGsS-p5quLwUfHAc40gHS&sz=w600" alt="Menal Operations">
+      </div>
+      <div class="hero-text">
+        <div class="hero-tag">Sistemas a tu medida</div>
+        <h1 class="hero-title">
+          Ordena tu operación.<br>
+          <span class="dim">Controla tus ventas.</span><br>
+          Haz crecer tu empresa con <span class="accent">data.</span>
+        </h1>
+        <p class="hero-sub">Ing. Edgardo Mendoza — CEO / Founder</p>
+        <a href="#contacto" class="hero-cta">Agendemos nuestra primera reunión</a>
+      </div>
     </div>
     <div class="scroll-hint">
       <span>Scroll</span>
