@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidad — Menal Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:   #1B2A4A;
+      --lime:   #B6FF6E;
+      --bg:     #F4F3F0;
+      --white:  #FFFFFF;
+      --muted:  #8A8883;
+      --border: rgba(27,42,74,0.10);
+      --font-d: 'Cormorant Garamond', Georgia, serif;
+      --font-b: 'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-b); background: var(--bg); color: var(--navy); }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 56px;
+      background: rgba(244,243,240,0.92);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 11px;
+      text-decoration: none; color: var(--navy);
+    }
+    .nav-brand-name {
+      font-size: 0.68rem; letter-spacing: 3.5px; text-transform: uppercase; font-weight: 500;
+    }
+    .nav-back {
+      font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--navy); text-decoration: none; opacity: 0.5;
+      display: flex; align-items: center; gap: 8px;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 1; }
+
+    .hero-bar {
+      background: var(--navy); padding: 72px 56px 56px;
+    }
+    .hero-bar-inner { max-width: 800px; margin: 0 auto; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--lime); background: rgba(182,255,110,0.1);
+      padding: 6px 14px; border-radius: 2px; margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: var(--font-d); font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600; color: var(--white); line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 16px;
+    }
+    .page-date {
+      font-size: 0.75rem; letter-spacing: 1px; color: rgba(255,255,255,0.35);
+    }
+
+    .content {
+      max-width: 800px; margin: 0 auto;
+      padding: 72px 56px 120px;
+    }
+
+    .section {
+      margin-bottom: 52px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .section-num {
+      font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--lime); background: var(--navy);
+      display: inline-block; padding: 4px 10px; border-radius: 2px;
+      margin-bottom: 14px;
+    }
+    h2 {
+      font-family: var(--font-d); font-size: 1.6rem; font-weight: 600;
+      letter-spacing: -0.01em; margin-bottom: 16px; color: var(--navy);
+    }
+    p {
+      font-size: 0.9rem; line-height: 1.82; color: #555;
+      margin-bottom: 14px;
+    }
+    p:last-child { margin-bottom: 0; }
+    ul {
+      margin: 12px 0 14px 0; padding-left: 0; list-style: none;
+    }
+    li {
+      font-size: 0.9rem; line-height: 1.75; color: #555;
+      padding: 6px 0 6px 20px; position: relative;
+    }
+    li::before {
+      content: '✦'; position: absolute; left: 0;
+      color: var(--lime); font-size: 8px; top: 10px;
+    }
+    a { color: var(--navy); font-weight: 500; }
+
+    .highlight-box {
+      background: var(--white); border-left: 3px solid var(--lime);
+      padding: 20px 24px; border-radius: 0 2px 2px 0;
+      margin: 20px 0;
+    }
+    .highlight-box p { color: var(--navy); font-weight: 400; margin: 0; }
+
+    footer {
+      background: var(--navy); padding: 32px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-copy { font-size: 0.68rem; letter-spacing: 1px; color: rgba(255,255,255,0.25); }
+    .footer-star { color: var(--lime); }
+
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .hero-bar { padding: 56px 24px 40px; }
+      .content { padding: 48px 24px 80px; }
+      footer { padding: 28px 24px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-name">Menal Operations</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      ← Volver al inicio
+    </a>
+  </nav>
+
+  <div class="hero-bar">
+    <div class="hero-bar-inner">
+      <div class="tag">✦ Legal</div>
+      <h1 class="page-title">Política de Privacidad</h1>
+      <p class="page-date">Última actualización: 20 de marzo de 2026</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="section">
+      <div class="section-num">01</div>
+      <h2>Responsable del tratamiento</h2>
+      <p>
+        <strong>Menal Operations</strong> es responsable del tratamiento de los datos personales recopilados a través de sus servicios, herramientas y canales de comunicación.
+      </p>
+      <p>
+        Para consultas relacionadas con el tratamiento de sus datos puede contactarnos a través de:<br>
+        WhatsApp: <strong>+57 301 986 1441</strong><br>
+        Email: <strong>contacto@menaloperations.com</strong>
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-num">02</div>
+      <h2>Datos que recopilamos</h2>
+      <p>En el desarrollo de nuestros servicios podemos recopilar los siguientes datos personales:</p>
+      <ul>
+        <li>Nombre completo</li>
+        <li>Número de teléfono (para comunicaciones por WhatsApp)</li>
+        <li>Correo electrónico</li>
+        <li>Información de pagos (montos, fechas de vencimiento, estado de cuenta)</li>
+        <li>Datos de uso de nuestros sistemas internos</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-num">03</div>
+      <h2>Finalidad del tratamiento</h2>
+      <p>Los datos recopilados son utilizados exclusivamente para:</p>
+      <ul>
+        <li>Gestionar el cobro y seguimiento de pagos de servicios contratados</li>
+        <li>Enviar recordatorios y notificaciones por WhatsApp sobre el estado de cuenta</li>
+        <li>Mantener comunicación relacionada con los servicios prestados</li>
+        <li>Cumplir obligaciones contractuales y legales</li>
+        <li>Mejorar la calidad de nuestros servicios</li>
+      </ul>
+      <div class="highlight-box">
+        <p>Sus datos <strong>nunca son vendidos ni compartidos</strong> con terceros para fines comerciales ajenos a la prestación de nuestros servicios.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">04</div>
+      <h2>Base legal del tratamiento</h2>
+      <p>
+        El tratamiento de datos se realiza con fundamento en la <strong>Ley 1581 de 2012</strong> (Ley de Protección de Datos Personales de Colombia) y el <strong>Decreto 1377 de 2013</strong>, bajo las bases de:
+      </p>
+      <ul>
+        <li>Consentimiento del titular para el envío de comunicaciones</li>
+        <li>Ejecución de una relación contractual</li>
+        <li>Interés legítimo en la gestión de cobros de servicios prestados</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-num">05</div>
+      <h2>Mensajes de WhatsApp</h2>
+      <p>
+        Utilizamos la <strong>API de WhatsApp Business</strong> de Meta para enviar notificaciones automatizadas relacionadas con el estado de pagos. Estos mensajes se envían únicamente a titulares que han contratado nuestros servicios.
+      </p>
+      <p>
+        Los mensajes enviados incluyen: recordatorios de pago, avisos de vencimiento y notificaciones de mora. En ningún caso se utilizará el canal de WhatsApp para fines publicitarios no relacionados con la relación contractual.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-num">06</div>
+      <h2>Almacenamiento y seguridad</h2>
+      <p>
+        Los datos son almacenados en plataformas seguras de Google (Google Sheets, Google Cloud) con controles de acceso restringido. Aplicamos medidas técnicas y organizativas para proteger la información contra accesos no autorizados, pérdida o alteración.
+      </p>
+      <p>
+        Los datos se conservan mientras dure la relación contractual y por el tiempo adicional exigido por la ley colombiana.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-num">07</div>
+      <h2>Derechos del titular</h2>
+      <p>De acuerdo con la Ley 1581 de 2012, usted tiene derecho a:</p>
+      <ul>
+        <li>Conocer, actualizar y rectificar sus datos personales</li>
+        <li>Solicitar prueba de su autorización de tratamiento</li>
+        <li>Ser informado sobre el uso de sus datos</li>
+        <li>Presentar quejas ante la Superintendencia de Industria y Comercio</li>
+        <li>Revocar la autorización y solicitar la supresión de sus datos</li>
+        <li>Acceder gratuitamente a sus datos personales</li>
+      </ul>
+      <p>Para ejercer estos derechos contáctenos a través de WhatsApp <strong>+57 301 986 1441</strong> o al correo <strong>contacto@menaloperations.com</strong>. Responderemos en un plazo máximo de 10 días hábiles.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-num">08</div>
+      <h2>Cambios a esta política</h2>
+      <p>
+        Menal Operations se reserva el derecho de actualizar esta política en cualquier momento. Los cambios serán publicados en esta página con la fecha de actualización correspondiente. El uso continuado de nuestros servicios implica la aceptación de las modificaciones.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="footer-copy">© 2026 Menal Operations. Todos los derechos reservados.</span>
+    <span class="footer-star">✦</span>
+  </footer>
+
+</body>
+</html>
