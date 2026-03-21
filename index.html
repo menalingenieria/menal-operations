@@ -33,7 +33,11 @@
       transition: padding 0.3s;
     }
     nav.scrolled { padding: 12px 60px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo img { height: 38px; width: auto; object-fit: contain; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo-name { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 3px; color: var(--navy); }
+    .nav-logo-sub { font-size: 0.6rem; letter-spacing: 2.5px; color: #9AA0AB; margin-top: 2px; }
     .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a {
       font-size: 0.72rem; font-weight: 500;
@@ -331,6 +335,10 @@
   <nav id="nav">
     <a href="#" class="nav-logo">
       <img src="https://drive.google.com/thumbnail?id=1BUyzn_VD0YTPCBGTUOyoItz_NgbE-Hli&sz=w200" alt="Menal Operations">
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">MENAL</span>
+        <span class="nav-logo-sub">OPERATIONS</span>
+      </div>
     </a>
     <ul class="nav-links">
       <li><a href="#servicios">Servicios</a></li>
