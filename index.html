@@ -506,6 +506,53 @@
     .phases-section { padding: 140px 60px; background: var(--bg-warm); }
     .phases-inner { max-width: 1180px; margin: 0 auto; }
 
+    .phases-explainer { text-align: center; margin-bottom: 72px; }
+    .phases-explainer .section-label { justify-content: center; }
+    .phases-flow {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 24px; align-items: stretch;
+      margin: 56px auto 0; max-width: 900px;
+    }
+    .phase-flow-item {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 28px 28px;
+      text-align: left;
+      border: 1px solid var(--line);
+      display: flex; gap: 18px; align-items: flex-start;
+      position: relative;
+    }
+    .phase-flow-item .icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--blue-dim);
+      color: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .phase-flow-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--blue);
+      font-weight: 600; margin-bottom: 6px;
+    }
+    .phase-flow-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .phase-flow-desc {
+      font-size: 0.85rem; color: var(--text-soft);
+      line-height: 1.55;
+    }
+    .phase-flow-arrow {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      font-size: 1.6rem;
+      font-weight: 300;
+    }
+
     .phase1-card {
       background: var(--white);
       padding: 56px;
@@ -523,12 +570,29 @@
       background: linear-gradient(180deg, var(--navy) 0%, var(--blue) 100%);
     }
     .phase-badge {
-      display: inline-block;
+      display: inline-flex; align-items: center; gap: 10px;
       font-size: 0.6rem; letter-spacing: 2.5px;
       text-transform: uppercase;
       background: var(--navy); color: var(--white);
-      padding: 6px 14px; border-radius: 3px; margin-bottom: 18px;
+      padding: 7px 14px; border-radius: 3px; margin-bottom: 18px;
       font-weight: 600;
+    }
+    .phase-badge .sep { opacity: 0.4; }
+    .phase-badge .accent { color: var(--blue); }
+    .plan-period-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blue); font-weight: 600;
+      margin-bottom: 10px;
+      padding: 4px 10px;
+      background: var(--blue-dim);
+      border-radius: 100px;
+    }
+    .plan-card.featured .plan-period-tag {
+      background: rgba(79,195,247,0.18);
+      color: var(--blue-bright);
     }
     .phase-title {
       font-family: 'Syne', sans-serif;
@@ -811,6 +875,8 @@
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .process-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
       .process-grid::before { display: none; }
+      .phases-flow { grid-template-columns: 1fr; gap: 14px; }
+      .phase-flow-arrow { transform: rotate(90deg); margin: 0 auto; }
       .phase1-card { grid-template-columns: 1fr; padding: 40px 32px; gap: 32px; }
       .plans-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
       .plan-card.featured { transform: none; }
@@ -1133,12 +1199,45 @@
   <section class="phases-section" id="planes">
     <div class="phases-inner">
 
+      <!-- Explainer -->
+      <div class="phases-explainer reveal">
+        <div class="section-label">Estructura del servicio</div>
+        <h2 class="section-title">Dos fases.<br>Una relación de largo plazo.</h2>
+        <p class="section-sub" style="max-width:680px; margin:18px auto 0;">
+          Primero implementamos tu sistema con una <strong>inversión única</strong>. Después te acompañamos mes a mes con una <strong>suscripción</strong> para que tu operación siga creciendo.
+        </p>
+
+        <div class="phases-flow">
+          <div class="phase-flow-item">
+            <div class="icon">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 6v2M12 16v2"/></svg>
+            </div>
+            <div>
+              <div class="phase-flow-type">Fase 1 · Pago único</div>
+              <div class="phase-flow-name">Implementación inicial</div>
+              <div class="phase-flow-desc">Una inversión única para diseñar, construir y lanzar tu sistema operativo completo desde cero.</div>
+            </div>
+          </div>
+          <div class="phase-flow-arrow">→</div>
+          <div class="phase-flow-item">
+            <div class="icon">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </div>
+            <div>
+              <div class="phase-flow-type">Fase 2 · Suscripción mensual</div>
+              <div class="phase-flow-name">Acompañamiento continuo</div>
+              <div class="phase-flow-desc">Soporte recurrente, ajustes técnicos y asesoría estratégica mes a mes para que el sistema evolucione contigo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Fase 1 -->
       <div class="phase1-card reveal">
         <div>
-          <span class="phase-badge">Fase 1</span>
+          <span class="phase-badge">Fase 1 <span class="sep">·</span> <span class="accent">Pago único</span></span>
           <h3 class="phase-title">Integración Operativa</h3>
-          <p class="phase-desc">Diseñamos e implementamos tu sistema operativo completo desde cero. Una sola inversión que deja tu empresa con la infraestructura, los procesos y las herramientas para operar con orden.</p>
+          <p class="phase-desc">Diseñamos e implementamos tu sistema operativo completo desde cero. Una inversión inicial única que deja tu empresa con la infraestructura, los procesos y las herramientas para operar con orden.</p>
           <a href="#contacto" class="phase-cta">
             Solicitar propuesta
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1158,15 +1257,16 @@
 
       <!-- Fase 2 -->
       <div class="phase2-header reveal">
-        <div class="section-label" style="justify-content:center;">Fase 2 — Acompañamiento continuo</div>
+        <div class="section-label" style="justify-content:center;">Fase 2 · Suscripción mensual</div>
         <h2 class="section-title">Tres niveles de soporte<br>según el momento de tu empresa.</h2>
-        <p class="section-sub">Después de la integración, eliges el plan mensual que mejor acompañe tu crecimiento.</p>
+        <p class="section-sub">Después de la implementación, eliges el plan de suscripción mensual que mejor acompañe tu crecimiento. Todos los planes son pagos recurrentes y puedes cambiar de nivel cuando lo necesites.</p>
       </div>
 
       <div class="plans-grid">
         <!-- Esencial -->
         <div class="plan-card reveal">
           <div class="plan-tag">Nivel 01</div>
+          <span class="plan-period-tag">Pago mensual</span>
           <div class="plan-name">Esencial</div>
           <div class="plan-desc">Para empresas que ya tienen el sistema funcionando y necesitan soporte preventivo y mantenimiento básico.</div>
           <div class="plan-divider"></div>
@@ -1182,6 +1282,7 @@
         <!-- Profesional (featured) -->
         <div class="plan-card featured reveal d1">
           <div class="plan-tag">Nivel 02</div>
+          <span class="plan-period-tag">Pago mensual</span>
           <div class="plan-name">Profesional</div>
           <div class="plan-desc">Para empresas en crecimiento que necesitan ajustes frecuentes, asesoría operativa y análisis de datos mensual.</div>
           <div class="plan-divider"></div>
@@ -1199,6 +1300,7 @@
         <!-- Ejecutivo -->
         <div class="plan-card reveal d2">
           <div class="plan-tag">Nivel 03</div>
+          <span class="plan-period-tag">Pago mensual</span>
           <div class="plan-name">Ejecutivo</div>
           <div class="plan-desc">Para empresas que quieren a Menal como aliado estratégico permanente, con presencia y optimización continua.</div>
           <div class="plan-divider"></div>
@@ -1228,6 +1330,10 @@
 
         <div class="faq-list reveal d1">
           <details open>
+            <summary>¿Cómo funciona el modelo de pago? ¿Es una sola inversión o una suscripción?</summary>
+            <div>Son <strong>dos cosas separadas</strong>. La <strong>Fase 1 es un pago único</strong> de implementación: cubre el diseño, construcción y puesta en marcha de tu sistema operativo completo. Una vez implementado, eliges un plan de la <strong>Fase 2</strong>, que es una <strong>suscripción mensual</strong> para soporte continuo, ajustes y asesoría estratégica. La Fase 2 es opcional pero recomendada para mantener tu sistema actualizado y creciendo.</div>
+          </details>
+          <details>
             <summary>¿Cuánto tiempo toma implementar el sistema completo?</summary>
             <div>Entre 4 y 6 semanas en promedio. El tiempo exacto depende del tamaño de tu operación, la cantidad de áreas a integrar y la disponibilidad de tu equipo para las sesiones de diagnóstico y capacitación.</div>
           </details>
