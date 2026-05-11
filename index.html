@@ -226,52 +226,159 @@
       font-family: 'JetBrains Mono', monospace; font-size: 0.66rem;
       color: rgba(255,255,255,0.45); letter-spacing: 0.2px;
     }
-    .mockup-body { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .mockup-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
+    /* === Dashboard mockup === */
+    .mockup-app { display: grid; grid-template-columns: 42px 1fr; gap: 12px; }
+    .mockup-sidebar {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px; padding: 6px 0;
+      background: rgba(255,255,255,0.02);
       border-radius: 8px;
-      padding: 14px;
     }
-    .mockup-card.wide { grid-column: span 2; }
-    .mockup-label {
-      font-size: 0.58rem; letter-spacing: 1.5px;
-      color: rgba(255,255,255,0.4); text-transform: uppercase;
+    .ms-logo {
+      width: 28px; height: 28px;
+      background: var(--blue);
+      color: var(--navy-deep);
+      border-radius: 7px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 0.78rem;
+      display: flex; align-items: center; justify-content: center;
       margin-bottom: 6px;
     }
-    .mockup-value {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.4rem; font-weight: 700;
-      color: var(--white); line-height: 1;
+    .ms-nav-item {
+      width: 30px; height: 30px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.32);
+      transition: background 0.2s, color 0.2s;
     }
-    .mockup-value .up { color: var(--blue); font-size: 0.75rem; margin-left: 6px; font-weight: 500; font-family: 'Outfit'; }
-    .mockup-chart {
-      margin-top: 12px;
-      height: 56px;
-      display: flex; align-items: flex-end; gap: 4px;
+    .ms-nav-item.active { background: rgba(79,195,247,0.14); color: var(--blue); }
+    .ms-nav-item.spacer { flex: 1; }
+
+    .mockup-main { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+    .mm-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .mockup-chart .bar {
-      flex: 1; background: linear-gradient(180deg, var(--blue) 0%, rgba(79,195,247,0.2) 100%);
-      border-radius: 2px 2px 0 0;
-      animation: barRise 1.2s 0.6s ease both;
-      transform-origin: bottom;
-    }
-    .mockup-chart .bar:nth-child(1) { height: 30%; animation-delay: 0.6s; }
-    .mockup-chart .bar:nth-child(2) { height: 55%; animation-delay: 0.7s; }
-    .mockup-chart .bar:nth-child(3) { height: 40%; animation-delay: 0.8s; }
-    .mockup-chart .bar:nth-child(4) { height: 70%; animation-delay: 0.9s; }
-    .mockup-chart .bar:nth-child(5) { height: 60%; animation-delay: 1s; }
-    .mockup-chart .bar:nth-child(6) { height: 90%; animation-delay: 1.1s; background: linear-gradient(180deg, var(--blue-bright) 0%, var(--blue) 100%); }
-    .mockup-chart .bar:nth-child(7) { height: 80%; animation-delay: 1.2s; }
-    .mockup-rows { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-    .mockup-row {
-      display: flex; align-items: center; gap: 10px;
-      padding: 6px 8px; background: rgba(255,255,255,0.02);
+    .mm-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--white); line-height: 1; }
+    .mm-subtitle { font-size: 0.62rem; color: rgba(255,255,255,0.4); margin-top: 4px; letter-spacing: 0.3px; }
+    .mm-actions { display: flex; align-items: center; gap: 8px; }
+    .mm-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
       border-radius: 5px;
+      font-size: 0.6rem; color: rgba(255,255,255,0.72);
+      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.3px;
     }
-    .mockup-row .swatch { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-    .mockup-row .text { flex: 1; font-size: 0.7rem; color: rgba(255,255,255,0.62); }
-    .mockup-row .pct { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--blue); }
+    .mm-avatar {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--navy-soft));
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.62rem;
+      letter-spacing: 0.5px;
+    }
+
+    .mm-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .mm-kpi {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 7px;
+      padding: 10px 12px;
+    }
+    .mm-kpi-label {
+      font-size: 0.53rem; letter-spacing: 1px;
+      color: rgba(255,255,255,0.42); text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .mm-kpi-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--white); line-height: 1; margin-bottom: 4px;
+    }
+    .mm-kpi-trend {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.3px;
+    }
+    .mm-kpi-trend.up { color: var(--blue); }
+    .mm-kpi-trend.warn { color: var(--accent); }
+
+    .mm-row { display: grid; grid-template-columns: 1.65fr 1fr; gap: 6px; }
+    .mm-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 7px;
+      padding: 12px;
+    }
+    .mm-card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 10px;
+    }
+    .mm-card-title {
+      font-size: 0.68rem; font-weight: 600; color: rgba(255,255,255,0.78);
+      letter-spacing: 0.2px;
+    }
+    .mm-legend { display: flex; align-items: center; gap: 8px; font-size: 0.52rem; color: rgba(255,255,255,0.4); letter-spacing: 0.3px; }
+    .mm-legend .ldot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); margin-right: 3px; display: inline-block; }
+    .mm-legend .ldot.dim { background: rgba(255,255,255,0.25); }
+    .mm-chart-wrap { height: 80px; position: relative; }
+    .mm-chart-svg { width: 100%; height: 100%; display: block; }
+
+    .mm-list { display: flex; flex-direction: column; gap: 8px; }
+    .mm-list-item .mli-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .mm-list-item .mli-name { font-size: 0.62rem; color: rgba(255,255,255,0.7); }
+    .mm-list-item .mli-pct { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--blue); }
+    .mm-list-item .mli-bar {
+      height: 4px; background: rgba(255,255,255,0.05);
+      border-radius: 100px; overflow: hidden;
+    }
+    .mm-list-item .mli-bar > div {
+      height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue-bright));
+      border-radius: 100px;
+      animation: barWidth 1.2s ease both;
+    }
+    .mm-list-item:nth-child(1) .mli-bar > div { animation-delay: 0.5s; }
+    .mm-list-item:nth-child(2) .mli-bar > div { animation-delay: 0.65s; }
+    .mm-list-item:nth-child(3) .mli-bar > div { animation-delay: 0.8s; }
+
+    .mm-table { display: flex; flex-direction: column; gap: 1px; }
+    .mm-tr {
+      display: grid; grid-template-columns: 0.6fr 1.3fr 0.7fr 0.85fr;
+      gap: 6px; align-items: center;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.02);
+      font-size: 0.6rem;
+    }
+    .mm-tr.head {
+      background: transparent;
+      color: rgba(255,255,255,0.3);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.52rem;
+      padding-bottom: 4px;
+    }
+    .mm-tr:first-child { border-radius: 6px 6px 0 0; }
+    .mm-tr:last-child { border-radius: 0 0 6px 6px; }
+    .mm-tr .mtd-id { font-family: 'JetBrains Mono', monospace; color: rgba(255,255,255,0.55); }
+    .mm-tr .mtd-name { color: rgba(255,255,255,0.85); font-weight: 500; }
+    .mm-tr .mtd-amount { font-family: 'JetBrains Mono', monospace; color: var(--white); text-align: right; }
+    .mm-status {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 8px; border-radius: 100px;
+      font-size: 0.54rem; letter-spacing: 0.4px;
+      text-transform: uppercase; font-weight: 600;
+      justify-self: end;
+    }
+    .mm-status .sdot { width: 4px; height: 4px; border-radius: 50%; }
+    .mm-status.ok { background: rgba(72,219,143,0.12); color: #48DB8F; }
+    .mm-status.ok .sdot { background: #48DB8F; }
+    .mm-status.work { background: rgba(79,195,247,0.12); color: var(--blue); }
+    .mm-status.work .sdot { background: var(--blue); }
+    .mm-status.wait { background: rgba(255,214,107,0.14); color: var(--accent); }
+    .mm-status.wait .sdot { background: var(--accent); }
 
     .mockup-float {
       position: absolute;
@@ -854,6 +961,8 @@
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     @keyframes barRise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    @keyframes barWidth { from { width: 0; } }
+    @keyframes drawLine { from { stroke-dashoffset: 800; } to { stroke-dashoffset: 0; } }
 
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -987,35 +1096,140 @@
             <div class="dot"></div><div class="dot"></div><div class="dot"></div>
             <div class="url">app.menal.co/dashboard</div>
           </div>
-          <div class="mockup-body">
-            <div class="mockup-card">
-              <div class="mockup-label">Ventas del mes</div>
-              <div class="mockup-value">$42.8M <span class="up">↑ 12%</span></div>
-            </div>
-            <div class="mockup-card">
-              <div class="mockup-label">Órdenes activas</div>
-              <div class="mockup-value">128 <span class="up">↑ 6</span></div>
-            </div>
-            <div class="mockup-card wide">
-              <div class="mockup-label">Producción semanal</div>
-              <div class="mockup-chart">
-                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                <div class="bar"></div>
+
+          <div class="mockup-app">
+            <!-- Sidebar -->
+            <aside class="mockup-sidebar">
+              <div class="ms-logo">M</div>
+              <div class="ms-nav-item active" title="Dashboard">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
               </div>
-            </div>
-            <div class="mockup-card wide">
-              <div class="mockup-label">Inventario crítico</div>
-              <div class="mockup-rows">
-                <div class="mockup-row">
-                  <div class="swatch" style="background:#4FC3F7;"></div>
-                  <div class="text">Producto A — stock saludable</div>
-                  <div class="pct">82%</div>
+              <div class="ms-nav-item" title="Ventas">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="ms-nav-item" title="Pedidos">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              </div>
+              <div class="ms-nav-item" title="Inventario">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <div class="ms-nav-item" title="Clientes">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              </div>
+              <div class="ms-nav-item spacer"></div>
+              <div class="ms-nav-item" title="Configuración">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              </div>
+            </aside>
+
+            <!-- Main -->
+            <div class="mockup-main">
+              <div class="mm-header">
+                <div>
+                  <div class="mm-title">Dashboard</div>
+                  <div class="mm-subtitle">Hoy · 11 may 2026</div>
                 </div>
-                <div class="mockup-row">
-                  <div class="swatch" style="background:#FFD66B;"></div>
-                  <div class="text">Producto B — revisar pedido</div>
-                  <div class="pct">38%</div>
+                <div class="mm-actions">
+                  <div class="mm-pill">Últimos 7 días ▾</div>
+                  <div class="mm-avatar">EM</div>
+                </div>
+              </div>
+
+              <!-- KPIs -->
+              <div class="mm-kpis">
+                <div class="mm-kpi">
+                  <div class="mm-kpi-label">Ventas mes</div>
+                  <div class="mm-kpi-value">$42.8M</div>
+                  <div class="mm-kpi-trend up">↑ 12.4% vs abril</div>
+                </div>
+                <div class="mm-kpi">
+                  <div class="mm-kpi-label">Pedidos hoy</div>
+                  <div class="mm-kpi-value">128</div>
+                  <div class="mm-kpi-trend up">↑ 8 nuevos</div>
+                </div>
+                <div class="mm-kpi">
+                  <div class="mm-kpi-label">Stock crítico</div>
+                  <div class="mm-kpi-value">3</div>
+                  <div class="mm-kpi-trend warn">! revisar</div>
+                </div>
+              </div>
+
+              <!-- Chart + side list -->
+              <div class="mm-row">
+                <div class="mm-card">
+                  <div class="mm-card-header">
+                    <div class="mm-card-title">Ventas semanales</div>
+                    <div class="mm-legend"><span><span class="ldot"></span>Esta sem</span><span><span class="ldot dim"></span>Anterior</span></div>
+                  </div>
+                  <div class="mm-chart-wrap">
+                    <svg class="mm-chart-svg" viewBox="0 0 320 80" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
+                          <stop offset="0%" stop-color="#4FC3F7" stop-opacity="0.35"/>
+                          <stop offset="100%" stop-color="#4FC3F7" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <line x1="0" y1="20" x2="320" y2="20" stroke="rgba(255,255,255,0.04)" stroke-width="0.5" stroke-dasharray="2 3"/>
+                      <line x1="0" y1="40" x2="320" y2="40" stroke="rgba(255,255,255,0.04)" stroke-width="0.5" stroke-dasharray="2 3"/>
+                      <line x1="0" y1="60" x2="320" y2="60" stroke="rgba(255,255,255,0.04)" stroke-width="0.5" stroke-dasharray="2 3"/>
+                      <path d="M0,55 C20,50 35,52 53,48 C75,44 90,58 107,52 C125,40 145,30 160,28 C180,32 200,42 213,38 C235,28 255,18 267,20 C285,18 300,22 320,18 L320,80 L0,80 Z" fill="url(#areaGrad)"/>
+                      <path d="M0,68 C20,65 35,70 53,66 C75,68 90,75 107,72 C125,70 145,62 160,58 C180,56 200,60 213,58 C235,54 255,52 267,50 C285,48 300,50 320,46" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+                      <path d="M0,55 C20,50 35,52 53,48 C75,44 90,58 107,52 C125,40 145,30 160,28 C180,32 200,42 213,38 C235,28 255,18 267,20 C285,18 300,22 320,18" stroke="#4FC3F7" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="800" style="animation: drawLine 2s 0.6s ease forwards;"/>
+                      <circle cx="160" cy="28" r="2.5" fill="#4FC3F7"/>
+                      <circle cx="267" cy="20" r="3" fill="#6FD4FF"/>
+                      <circle cx="267" cy="20" r="6" fill="#6FD4FF" fill-opacity="0.2"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="mm-card">
+                  <div class="mm-card-header">
+                    <div class="mm-card-title">Top productos</div>
+                  </div>
+                  <div class="mm-list">
+                    <div class="mm-list-item">
+                      <div class="mli-top"><span class="mli-name">Producto A</span><span class="mli-pct">82%</span></div>
+                      <div class="mli-bar"><div style="width:82%;"></div></div>
+                    </div>
+                    <div class="mm-list-item">
+                      <div class="mli-top"><span class="mli-name">Producto C</span><span class="mli-pct">64%</span></div>
+                      <div class="mli-bar"><div style="width:64%;"></div></div>
+                    </div>
+                    <div class="mm-list-item">
+                      <div class="mli-top"><span class="mli-name">Producto B</span><span class="mli-pct">38%</span></div>
+                      <div class="mli-bar"><div style="width:38%;"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent orders -->
+              <div class="mm-card">
+                <div class="mm-card-header">
+                  <div class="mm-card-title">Pedidos recientes</div>
+                  <div class="mm-pill" style="background:transparent;border:none;color:var(--blue);">Ver todos →</div>
+                </div>
+                <div class="mm-table">
+                  <div class="mm-tr head">
+                    <span>ID</span><span>Cliente</span><span style="text-align:right;">Monto</span><span style="text-align:right;">Estado</span>
+                  </div>
+                  <div class="mm-tr">
+                    <span class="mtd-id">#1247</span>
+                    <span class="mtd-name">Distribuidora Sur</span>
+                    <span class="mtd-amount">$1.2M</span>
+                    <span class="mm-status ok"><span class="sdot"></span>Enviado</span>
+                  </div>
+                  <div class="mm-tr">
+                    <span class="mtd-id">#1246</span>
+                    <span class="mtd-name">Comercial ABC</span>
+                    <span class="mtd-amount">$850K</span>
+                    <span class="mm-status work"><span class="sdot"></span>Producción</span>
+                  </div>
+                  <div class="mm-tr">
+                    <span class="mtd-id">#1245</span>
+                    <span class="mtd-name">Almacenes XYZ</span>
+                    <span class="mtd-amount">$2.1M</span>
+                    <span class="mm-status wait"><span class="sdot"></span>Pendiente</span>
+                  </div>
                 </div>
               </div>
             </div>
