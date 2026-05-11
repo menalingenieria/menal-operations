@@ -56,10 +56,12 @@
       background: rgba(245,244,240,0.94);
     }
     .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .nav-logo img { height: 42px; width: auto; object-fit: contain; }
+    .nav-logo img { height: 52px; width: auto; object-fit: contain; }
     .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
-    .nav-logo-name { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; letter-spacing: 3px; color: var(--navy); }
-    .nav-logo-sub { font-size: 0.66rem; letter-spacing: 2.5px; color: #9AA0AB; margin-top: 4px; }
+    .nav-logo-name { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 700; letter-spacing: 3px; color: var(--navy); }
+    .nav-logo-sub { font-size: 0.72rem; letter-spacing: 2.5px; color: #9AA0AB; margin-top: 5px; }
+    nav.scrolled .nav-logo img { height: 44px; }
+    nav.scrolled .nav-logo-name { font-size: 1.1rem; }
     .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a {
       font-size: 0.72rem; font-weight: 500;
@@ -114,13 +116,6 @@
       gap: 80px; align-items: center;
     }
     .hero-text { animation: fadeUp 0.9s ease both; }
-    .hero-brand-mark {
-      width: clamp(140px, 16vw, 190px);
-      height: auto;
-      margin-bottom: 32px;
-      filter: drop-shadow(0 0 50px rgba(79,195,247,0.28));
-      animation: fadeUp 0.8s ease both;
-    }
     .hero-tag {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
@@ -208,13 +203,11 @@
     .mockup-frame {
       background: linear-gradient(160deg, #1A2845 0%, #0F1B33 100%);
       border-radius: 14px;
-      padding: 16px;
+      padding: 18px;
       box-shadow:
         0 30px 80px rgba(0,0,0,0.5),
         0 0 0 1px rgba(255,255,255,0.06) inset,
         0 0 60px rgba(79,195,247,0.12);
-      transform: rotateY(-6deg) rotateX(2deg);
-      transform-style: preserve-3d;
     }
     .mockup-bar {
       display: flex; align-items: center; gap: 8px;
@@ -291,8 +284,8 @@
       display: flex; align-items: center; gap: 12px;
       animation: float 5s ease-in-out infinite;
     }
-    .mockup-float.f1 { top: -18px; left: -28px; }
-    .mockup-float.f2 { bottom: -22px; right: -20px; animation-delay: 1.5s; }
+    .mockup-float.f1 { top: -34px; left: -34px; }
+    .mockup-float.f2 { bottom: -28px; right: -28px; animation-delay: 1.5s; }
     .mockup-float-icon {
       width: 32px; height: 32px; border-radius: 8px;
       background: var(--blue-dim); color: var(--blue);
@@ -886,7 +879,6 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <img class="hero-brand-mark" src="https://drive.google.com/thumbnail?id=19MLgSUY9mY1WGsS-p5quLwUfHAc40gHS&sz=w600" alt="Menal Operations">
         <div class="hero-tag"><span class="pulse"></span> Sistemas operativos a la medida</div>
         <h1 class="hero-title">
           Ordena tu operación.<br>
